@@ -1,90 +1,122 @@
+%option noyywrap nodefault yylineno
 %{
+#include <stdlib.h>
 #include "y.tab.h"
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
+
+int yyerror(const char *);
+int line_no = 1;
+int exit_flag = 0;
 %}
 
-DIGIT       [0-9]
-LETTER      [a-zA-Z]
-VARIABLE    [A-Z_][a-zA-Z0-9_]*
-ATOM        [a-z][a-zA-Z0-9_]*
-NUMBER      {DIGIT}+
-STRING      \"[^"]*\"
-
 %%
 
-%[^\n]*  { 
-    printf("DEBUG: COMMENT - pass\n");
+
+"=="|"mod"|"rem"|"div"|"is"|"="|"<="|"<"|">="|">"|\+|\*|\/ {
+    printf("GET TOKEN OPERATOR (%s)\n", yytext);
+    return OPERATOR;
 }
 
-{VARIABLE}   { 
-    yylval.str = strdup(yytext); 
-    printf("DEBUG: VARIABLE - '%s'\n", yylval.str); 
-    return VARIABLE; 
+
+(-)?[0-9]+ {
+    printf("GET TOKEN NUMBER (%s)\n", yytext);
+    return NUMBER;
 }
 
-{ATOM}       { 
-    yylval.str = strdup(yytext); 
-    printf("DEBUG: ATOM - '%s'\n", yylval.str); 
-    return ATOM; 
+
+[a-z]([a-z]|[A-Z]|[0-9]|_)* {
+    printf("GET TOKEN ATOM (%s)\n", yytext);
+    return ATOM;
 }
 
-{NUMBER}     { 
-    yylval.num = atoi(yytext); 
-    printf("DEBUG: NUMBER - %d\n", yylval.num); 
-    return NUMBER; 
+
+(_|[A-Z])([a-z]|[A-Z]|[0-9]|_)* {
+    printf("GET TOKEN VARIABLE (%s)\n", yytext);
+    return VARIABLE;
 }
 
-{STRING}     { 
-    yylval.str = strdup(yytext); 
-    printf("DEBUG: STRING - '%s'\n", yylval.str); 
-    return STRING; 
+
+"." {
+    printf("GET TOKEN DOT\n");
+    return DOT;
 }
 
-:-          { 
-    printf("DEBUG: IMPLICATION\n"); 
-    return IMPLICATION; 
+
+"(" {
+    printf("GET OPBR\n");
+    return OPBR;
 }
 
-"."          { 
-    printf("DEBUG: DOT\n"); 
-    return DOT; 
+
+")" {
+    printf("GET CLBR\n");
+    return CLBR;
 }
 
-"("          { 
-    printf("DEBUG: LPAREN\n"); 
-    return LPAREN; 
+
+"," {
+    printf("GET COMMA\n");
+    return COMMA;
 }
 
-")"          { 
-    printf("DEBUG: RPAREN\n"); 
-    return RPAREN; 
+
+":" {
+    printf("GET COLON\n");
+    return COLON;
 }
 
-"["          { 
-    printf("DEBUG: LBRACKET\n"); 
-    return LBRACKET; 
+
+"-" {
+    printf("GET MINUS\n");
+    return MINUS;
 }
 
-"]"          { 
-    printf("DEBUG: RBRACKET\n"); 
-    return RBRACKET; 
+
+"[" { 
+    printf("GET TOKEN SQOPBR ([)\n");
+    return SQOPBR;
 }
 
-","          { 
-    printf("DEBUG: COMMA\n"); 
-    return COMMA; 
+
+"]" { 
+    printf("GET TOKEN SQCLBR (])\n");
+    return SQCLBR;
 }
 
-[ \t\n]      ; 
 
-.            { 
-    printf("DEBUG: UNKNOWN TOKEN - '%s'\n", yytext); 
-    return ERROR; 
+"|" {
+    printf("GET TOKEN VERTICAL_PIPE (|)\n");
+    return VERTICAL_PIPE;
 }
 
-%%
 
-int yywrap() {
-    return 1;
+
+[ \t\f]  ;  
+
+
+\n {
+    line_no++;
+    printf("GET TOKEN ENDLINE\n");
+    return ENDLINE;
+}
+
+
+<<EOF>> { 
+    
+    if (exit_flag)
+    {
+        return 0;
+    } 
+    else
+    {
+        exit_flag = 1;
+        return ENDLINE; 
+    }
+} 
+
+
+. {
+    fprintf(stderr, "Error: invalid character (%s) at line %d\n", yytext, line_no);
+    yyerror("invalid character");
 }

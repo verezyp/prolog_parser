@@ -69,14 +69,21 @@
 /* First part of user prologue.  */
 #line 1 "parser.y"
 
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
-extern FILE* yyin;
-extern int yylex();
-void yyerror(const char *s);
+int yylex();
+int yyerror(const char *s);
 
-#line 80 "y.tab.c"
+extern char *yytext;
+extern int line_no;
+extern FILE* yyin;
+
+
+
+#line 87 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -120,18 +127,20 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    VARIABLE = 258,                /* VARIABLE  */
-    ATOM = 259,                    /* ATOM  */
-    STRING = 260,                  /* STRING  */
-    NUMBER = 261,                  /* NUMBER  */
-    IMPLICATION = 262,             /* IMPLICATION  */
-    DOT = 263,                     /* DOT  */
-    COMMA = 264,                   /* COMMA  */
-    LPAREN = 265,                  /* LPAREN  */
-    RPAREN = 266,                  /* RPAREN  */
-    LBRACKET = 267,                /* LBRACKET  */
-    RBRACKET = 268,                /* RBRACKET  */
-    ERROR = 269                    /* ERROR  */
+    ATOM = 258,                    /* ATOM  */
+    VARIABLE = 259,                /* VARIABLE  */
+    NUMBER = 260,                  /* NUMBER  */
+    SQOPBR = 261,                  /* SQOPBR  */
+    SQCLBR = 262,                  /* SQCLBR  */
+    ENDLINE = 263,                 /* ENDLINE  */
+    VERTICAL_PIPE = 264,           /* VERTICAL_PIPE  */
+    OPERATOR = 265,                /* OPERATOR  */
+    DOT = 266,                     /* DOT  */
+    OPBR = 267,                    /* OPBR  */
+    CLBR = 268,                    /* CLBR  */
+    COMMA = 269,                   /* COMMA  */
+    COLON = 270,                   /* COLON  */
+    MINUS = 271                    /* MINUS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -140,32 +149,24 @@ extern int yydebug;
 #define YYEOF 0
 #define YYerror 256
 #define YYUNDEF 257
-#define VARIABLE 258
-#define ATOM 259
-#define STRING 260
-#define NUMBER 261
-#define IMPLICATION 262
-#define DOT 263
-#define COMMA 264
-#define LPAREN 265
-#define RPAREN 266
-#define LBRACKET 267
-#define RBRACKET 268
-#define ERROR 269
+#define ATOM 258
+#define VARIABLE 259
+#define NUMBER 260
+#define SQOPBR 261
+#define SQCLBR 262
+#define ENDLINE 263
+#define VERTICAL_PIPE 264
+#define OPERATOR 265
+#define DOT 266
+#define OPBR 267
+#define CLBR 268
+#define COMMA 269
+#define COLON 270
+#define MINUS 271
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-union YYSTYPE
-{
-#line 10 "parser.y"
-
-    char *str;
-    int num;
-
-#line 166 "y.tab.c"
-
-};
-typedef union YYSTYPE YYSTYPE;
+typedef int YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -185,28 +186,33 @@ enum yysymbol_kind_t
   YYSYMBOL_YYEOF = 0,                      /* "end of file"  */
   YYSYMBOL_YYerror = 1,                    /* error  */
   YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
-  YYSYMBOL_VARIABLE = 3,                   /* VARIABLE  */
-  YYSYMBOL_ATOM = 4,                       /* ATOM  */
-  YYSYMBOL_STRING = 5,                     /* STRING  */
-  YYSYMBOL_NUMBER = 6,                     /* NUMBER  */
-  YYSYMBOL_IMPLICATION = 7,                /* IMPLICATION  */
-  YYSYMBOL_DOT = 8,                        /* DOT  */
-  YYSYMBOL_COMMA = 9,                      /* COMMA  */
-  YYSYMBOL_LPAREN = 10,                    /* LPAREN  */
-  YYSYMBOL_RPAREN = 11,                    /* RPAREN  */
-  YYSYMBOL_LBRACKET = 12,                  /* LBRACKET  */
-  YYSYMBOL_RBRACKET = 13,                  /* RBRACKET  */
-  YYSYMBOL_ERROR = 14,                     /* ERROR  */
-  YYSYMBOL_YYACCEPT = 15,                  /* $accept  */
-  YYSYMBOL_program = 16,                   /* program  */
-  YYSYMBOL_clause = 17,                    /* clause  */
-  YYSYMBOL_fact = 18,                      /* fact  */
-  YYSYMBOL_rule = 19,                      /* rule  */
-  YYSYMBOL_head = 20,                      /* head  */
-  YYSYMBOL_body = 21,                      /* body  */
-  YYSYMBOL_term = 22,                      /* term  */
-  YYSYMBOL_term_list = 23,                 /* term_list  */
-  YYSYMBOL_list = 24                       /* list  */
+  YYSYMBOL_ATOM = 3,                       /* ATOM  */
+  YYSYMBOL_VARIABLE = 4,                   /* VARIABLE  */
+  YYSYMBOL_NUMBER = 5,                     /* NUMBER  */
+  YYSYMBOL_SQOPBR = 6,                     /* SQOPBR  */
+  YYSYMBOL_SQCLBR = 7,                     /* SQCLBR  */
+  YYSYMBOL_ENDLINE = 8,                    /* ENDLINE  */
+  YYSYMBOL_VERTICAL_PIPE = 9,              /* VERTICAL_PIPE  */
+  YYSYMBOL_OPERATOR = 10,                  /* OPERATOR  */
+  YYSYMBOL_DOT = 11,                       /* DOT  */
+  YYSYMBOL_OPBR = 12,                      /* OPBR  */
+  YYSYMBOL_CLBR = 13,                      /* CLBR  */
+  YYSYMBOL_COMMA = 14,                     /* COMMA  */
+  YYSYMBOL_COLON = 15,                     /* COLON  */
+  YYSYMBOL_MINUS = 16,                     /* MINUS  */
+  YYSYMBOL_YYACCEPT = 17,                  /* $accept  */
+  YYSYMBOL_program = 18,                   /* program  */
+  YYSYMBOL_prolog = 19,                    /* prolog  */
+  YYSYMBOL_clauselist = 20,                /* clauselist  */
+  YYSYMBOL_clause = 21,                    /* clause  */
+  YYSYMBOL_endlines = 22,                  /* endlines  */
+  YYSYMBOL_opt_endlines = 23,              /* opt_endlines  */
+  YYSYMBOL_predicatelist = 24,             /* predicatelist  */
+  YYSYMBOL_predicate = 25,                 /* predicate  */
+  YYSYMBOL_subterm = 26,                   /* subterm  */
+  YYSYMBOL_termlist = 27,                  /* termlist  */
+  YYSYMBOL_term = 28,                      /* term  */
+  YYSYMBOL_structure = 29                  /* structure  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -532,21 +538,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  2
+#define YYFINAL  9
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   28
+#define YYLAST   68
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  15
+#define YYNTOKENS  17
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  10
+#define YYNNTS  13
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  22
+#define YYNRULES  34
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  31
+#define YYNSTATES  60
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   269
+#define YYMAXUTOK   271
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -586,16 +592,18 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9,    10,    11,    12,    13,    14
+       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
+      15,    16
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_int8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
-       0,    21,    21,    22,    27,    30,    31,    34,    35,    40,
-      44,    45,    48,    49,    52,    53,    54,    55,    56,    59,
-      60,    65,    66
+       0,    32,    32,    39,    49,    56,    66,    73,    83,    90,
+      97,   107,   114,   122,   126,   136,   143,   150,   157,   167,
+     174,   184,   191,   198,   205,   213,   217,   224,   231,   241,
+     248,   255,   262,   272,   279
 };
 #endif
 
@@ -611,10 +619,11 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "\"end of file\"", "error", "\"invalid token\"", "VARIABLE", "ATOM",
-  "STRING", "NUMBER", "IMPLICATION", "DOT", "COMMA", "LPAREN", "RPAREN",
-  "LBRACKET", "RBRACKET", "ERROR", "$accept", "program", "clause", "fact",
-  "rule", "head", "body", "term", "term_list", "list", YY_NULLPTR
+  "\"end of file\"", "error", "\"invalid token\"", "ATOM", "VARIABLE",
+  "NUMBER", "SQOPBR", "SQCLBR", "ENDLINE", "VERTICAL_PIPE", "OPERATOR",
+  "DOT", "OPBR", "CLBR", "COMMA", "COLON", "MINUS", "$accept", "program",
+  "prolog", "clauselist", "clause", "endlines", "opt_endlines",
+  "predicatelist", "predicate", "subterm", "termlist", "term", "structure", YY_NULLPTR
 };
 
 static const char *
@@ -624,12 +633,12 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-12)
+#define YYPACT_NINF (-23)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-1)
+#define YYTABLE_NINF (-34)
 
 #define yytable_value_is_error(Yyn) \
   0
@@ -638,10 +647,12 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -12,    13,   -12,    -5,    16,   -12,   -12,     5,     3,    21,
-     -12,     3,   -12,   -12,   -12,   -12,    -2,   -12,    10,   -12,
-      19,    11,   -12,   -12,     9,     3,   -12,     3,   -12,   -12,
-     -12
+      42,    -1,   -23,    19,    42,    43,   -23,    -9,    49,   -23,
+     -23,   -23,   -23,   -23,    21,    48,   -23,   -23,    49,    27,
+     -23,   -23,    10,    49,     3,    49,   -23,    49,    15,    53,
+      50,   -23,    16,    18,    29,   -23,   -23,   -23,    49,    51,
+     -23,    39,    49,    49,    49,    49,   -23,    35,   -23,   -23,
+      55,    53,   -23,   -23,   -23,   -23,    23,   -23,   -23,    16
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -649,22 +660,26 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       2,     0,     1,     7,     0,     4,     5,     0,     0,     0,
-       3,     0,    15,    14,    17,    16,     0,    19,     0,    18,
-       6,     9,    12,    21,     0,     0,     8,     0,    22,    20,
-      13
+       0,    19,     5,     0,     3,     0,     6,     0,    25,     1,
+       2,     4,     7,     8,     0,    30,    31,    29,    25,     0,
+      26,    32,     0,    25,     0,     0,    20,     0,    19,     0,
+       0,    15,    17,     0,     0,    34,    28,    27,    25,     0,
+      10,    13,     0,     0,     0,     0,    33,     0,     9,    11,
+      14,     0,    23,    24,    21,    22,    20,    12,    16,    18
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -12,   -12,    18,   -12,   -12,   -12,   -12,   -11,    12,   -12
+     -23,    31,   -23,   -23,    61,   -23,   -23,    38,   -21,    17,
+     -14,   -22,   -23
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     1,     4,     5,     6,     7,    21,    17,    18,    19
+       0,     3,     4,     5,     6,    50,    51,    30,     7,    32,
+      19,    20,    21
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -672,42 +687,54 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      22,    12,    13,    14,    15,     8,    12,    13,    14,    15,
-      16,    23,    11,     2,    29,    16,    30,     3,    25,    25,
-      27,    26,    28,     9,    10,     3,     9,    20,    24
+      33,    31,    13,    36,    24,    37,    14,    33,    31,    34,
+      35,     8,    25,    28,    16,    17,    18,    27,    29,     9,
+      52,    53,    54,    55,    47,   -30,    42,    38,    44,    33,
+      58,   -30,    43,   -33,    45,    10,    25,    22,    25,   -33,
+      26,    27,    46,    27,    25,     1,     1,    49,    56,    27,
+       2,    11,    15,    16,    17,    18,    28,    16,    17,    18,
+      23,    40,    48,    57,    41,    41,    12,    39,    59
 };
 
 static const yytype_int8 yycheck[] =
 {
-      11,     3,     4,     5,     6,    10,     3,     4,     5,     6,
-      12,    13,     7,     0,    25,    12,    27,     4,     9,     9,
-       9,    11,    13,     7,     8,     4,     7,     9,    16
+      22,    22,    11,    25,    18,    27,    15,    29,    29,    23,
+       7,    12,     9,     3,     4,     5,     6,    14,     8,     0,
+      42,    43,    44,    45,    38,    10,    10,    12,    10,    51,
+      51,    16,    16,    10,    16,     4,     9,    16,     9,    16,
+      13,    14,    13,    14,     9,     3,     3,     8,    13,    14,
+       8,     8,     3,     4,     5,     6,     3,     4,     5,     6,
+      12,    11,    11,     8,    14,    14,     5,    29,    51
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    16,     0,     4,    17,    18,    19,    20,    10,     7,
-       8,     7,     3,     4,     5,     6,    12,    22,    23,    24,
-      17,    21,    22,    13,    23,     9,    11,     9,    13,    22,
-      22
+       0,     3,     8,    18,    19,    20,    21,    25,    12,     0,
+      18,     8,    21,    11,    15,     3,     4,     5,     6,    27,
+      28,    29,    16,    12,    27,     9,    13,    14,     3,     8,
+      24,    25,    26,    28,    27,     7,    28,    28,    12,    24,
+      11,    14,    10,    16,    10,    16,    13,    27,    11,     8,
+      22,    23,    28,    28,    28,    28,    13,     8,    25,    26
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    15,    16,    16,    17,    17,    17,    18,    18,    19,
-      20,    20,    21,    21,    22,    22,    22,    22,    22,    23,
-      23,    24,    24
+       0,    17,    18,    18,    19,    19,    20,    20,    21,    21,
+      21,    22,    22,    23,    23,    24,    24,    24,    24,    25,
+      25,    26,    26,    26,    26,    27,    27,    27,    27,    28,
+      28,    28,    28,    29,    29
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     0,     3,     1,     1,     3,     1,     4,     3,
-       1,     4,     1,     3,     1,     1,     1,     1,     1,     1,
-       3,     2,     3
+       0,     2,     2,     1,     2,     1,     1,     2,     2,     6,
+       5,     1,     2,     0,     1,     1,     4,     1,     4,     1,
+       4,     3,     3,     3,     3,     0,     1,     3,     3,     1,
+       1,     1,     1,     4,     3
 };
 
 
@@ -1170,48 +1197,256 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 3: /* program: program clause DOT  */
-#line 22 "parser.y"
-                            {
-            printf("DEBUG: program clause DOT \n ");
-        }
-#line 1179 "y.tab.c"
-    break;
-
-  case 4: /* clause: fact  */
-#line 27 "parser.y"
-             {
-    printf("DEBUG: clause: fact \n ");
-}
-#line 1187 "y.tab.c"
-    break;
-
-  case 8: /* fact: ATOM LPAREN term_list RPAREN  */
-#line 35 "parser.y"
-                                   {
-        printf("DEBUG: ATOM LPAREN term_list RPAREN \n ");
+  case 2: /* program: prolog program  */
+#line 33 "parser.y"
+    { 
+        printf("Rule: program -> prolog program\n"); 
     }
-#line 1195 "y.tab.c"
+#line 1206 "y.tab.c"
     break;
 
-  case 9: /* rule: head IMPLICATION body  */
+  case 3: /* program: prolog  */
 #line 40 "parser.y"
-                            {
-    printf("DEBUG: head IMPLICATION body \n ");
+    { 
+        printf("Rule: program -> prolog\n"); 
     }
-#line 1203 "y.tab.c"
+#line 1214 "y.tab.c"
     break;
 
-  case 20: /* term_list: term_list COMMA term  */
-#line 60 "parser.y"
-                                {
-            printf("DEBUG:term_list COMMA term \n ");
-         }
-#line 1211 "y.tab.c"
+  case 4: /* prolog: clauselist ENDLINE  */
+#line 50 "parser.y"
+    { 
+        printf("Rule: prolog -> clauselist ENDLINE\n"); 
+    }
+#line 1222 "y.tab.c"
+    break;
+
+  case 5: /* prolog: ENDLINE  */
+#line 57 "parser.y"
+    {
+        printf("Rule: JUST ENDLINE\n"); 
+    }
+#line 1230 "y.tab.c"
+    break;
+
+  case 6: /* clauselist: clause  */
+#line 67 "parser.y"
+    { 
+        printf("Rule: clauselist -> clause\n"); 
+    }
+#line 1238 "y.tab.c"
+    break;
+
+  case 7: /* clauselist: clauselist clause  */
+#line 74 "parser.y"
+    { 
+        printf("Rule: clauselist -> clauselist clause\n"); 
+    }
+#line 1246 "y.tab.c"
+    break;
+
+  case 8: /* clause: predicate DOT  */
+#line 84 "parser.y"
+    { 
+        printf("Rule: clause -> predicate .\n"); 
+    }
+#line 1254 "y.tab.c"
+    break;
+
+  case 9: /* clause: predicate COLON MINUS ENDLINE predicatelist DOT  */
+#line 91 "parser.y"
+    { 
+        printf("Rule: clause -> predicate :- predicatelist .\n"); 
+    }
+#line 1262 "y.tab.c"
+    break;
+
+  case 10: /* clause: predicate COLON MINUS predicatelist DOT  */
+#line 98 "parser.y"
+    { 
+        printf("Rule: clause -> predicate :- predicatelist .\n"); 
+    }
+#line 1270 "y.tab.c"
+    break;
+
+  case 11: /* endlines: ENDLINE  */
+#line 108 "parser.y"
+    {
+        printf("Rule: endlines -> ENDLINE\n"); 
+    }
+#line 1278 "y.tab.c"
+    break;
+
+  case 12: /* endlines: endlines ENDLINE  */
+#line 115 "parser.y"
+    {
+        printf("Rule: endlines -> endlines ENDLINE\n"); 
+    }
+#line 1286 "y.tab.c"
+    break;
+
+  case 14: /* opt_endlines: endlines  */
+#line 127 "parser.y"
+    {
+        printf("Rule: opt_endlines -> endlines\n"); 
+    }
+#line 1294 "y.tab.c"
+    break;
+
+  case 15: /* predicatelist: predicate  */
+#line 137 "parser.y"
+    { 
+        printf("Rule: predicatelist -> predicate\n"); 
+    }
+#line 1302 "y.tab.c"
+    break;
+
+  case 16: /* predicatelist: predicatelist COMMA opt_endlines predicate  */
+#line 144 "parser.y"
+    { 
+        printf("Rule: predicatelist -> predicatelist , predicate\n"); 
+    }
+#line 1310 "y.tab.c"
+    break;
+
+  case 17: /* predicatelist: subterm  */
+#line 151 "parser.y"
+    {
+        printf("Rule: predicate -> predicatelist subterm\n"); 
+    }
+#line 1318 "y.tab.c"
+    break;
+
+  case 18: /* predicatelist: predicatelist COMMA opt_endlines subterm  */
+#line 158 "parser.y"
+    {
+        printf("Rule: predicatelist COMMA opt_endlines  subterm\n"); 
+    }
+#line 1326 "y.tab.c"
+    break;
+
+  case 19: /* predicate: ATOM  */
+#line 168 "parser.y"
+    { 
+        printf("Rule: predicate -> ATOM\n"); 
+    }
+#line 1334 "y.tab.c"
+    break;
+
+  case 20: /* predicate: ATOM OPBR termlist CLBR  */
+#line 175 "parser.y"
+    { 
+        printf("Rule: predicate -> ATOM ( termlist )\n"); 
+    }
+#line 1342 "y.tab.c"
+    break;
+
+  case 21: /* subterm: term OPERATOR term  */
+#line 185 "parser.y"
+    {
+        printf("Rule: subterm OPERATOR term\n"); 
+    }
+#line 1350 "y.tab.c"
+    break;
+
+  case 22: /* subterm: term MINUS term  */
+#line 192 "parser.y"
+    {
+        printf("Rule: subterm MINUS term\n"); 
+    }
+#line 1358 "y.tab.c"
+    break;
+
+  case 23: /* subterm: subterm OPERATOR term  */
+#line 199 "parser.y"
+    {
+        printf("Rule: subterm OPERATOR term\n"); 
+    }
+#line 1366 "y.tab.c"
+    break;
+
+  case 24: /* subterm: subterm MINUS term  */
+#line 206 "parser.y"
+    {
+        printf("Rule: subterm MINUS term\n"); 
+    }
+#line 1374 "y.tab.c"
+    break;
+
+  case 26: /* termlist: term  */
+#line 218 "parser.y"
+    { 
+        printf("Rule: termlist -> term\n"); 
+    }
+#line 1382 "y.tab.c"
+    break;
+
+  case 27: /* termlist: termlist COMMA term  */
+#line 225 "parser.y"
+    { 
+        printf("Rule: termlist -> termlist , term\n"); 
+    }
+#line 1390 "y.tab.c"
+    break;
+
+  case 28: /* termlist: termlist VERTICAL_PIPE term  */
+#line 232 "parser.y"
+    {
+        printf("Rule: termlist -> termlist | term\n"); 
+    }
+#line 1398 "y.tab.c"
+    break;
+
+  case 29: /* term: NUMBER  */
+#line 242 "parser.y"
+    { 
+        printf("Rule: term -> NUMBER\n"); 
+    }
+#line 1406 "y.tab.c"
+    break;
+
+  case 30: /* term: ATOM  */
+#line 249 "parser.y"
+    { 
+        printf("Rule: term -> ATOM\n"); 
+    }
+#line 1414 "y.tab.c"
+    break;
+
+  case 31: /* term: VARIABLE  */
+#line 256 "parser.y"
+    { 
+        printf("Rule: term -> VARIABLE\n"); 
+    }
+#line 1422 "y.tab.c"
+    break;
+
+  case 32: /* term: structure  */
+#line 263 "parser.y"
+    { 
+        printf("Rule: term -> structure\n"); 
+    }
+#line 1430 "y.tab.c"
+    break;
+
+  case 33: /* structure: ATOM OPBR termlist CLBR  */
+#line 273 "parser.y"
+    { 
+        printf("Rule: structure -> ATOM ( termlist )\n"); 
+    }
+#line 1438 "y.tab.c"
+    break;
+
+  case 34: /* structure: SQOPBR termlist SQCLBR  */
+#line 280 "parser.y"
+    {
+        printf("Rule: structure -> [] ( termlist )\n"); 
+    }
+#line 1446 "y.tab.c"
     break;
 
 
-#line 1215 "y.tab.c"
+#line 1450 "y.tab.c"
 
       default: break;
     }
@@ -1404,18 +1639,20 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 69 "parser.y"
+#line 287 "parser.y"
 
 
-void yyerror(const char *s) {
-    fprintf(stderr, "Ошибка: %s\n", s);
+
+int yyerror(const char *s)
+{
+    printf("Error: %s on line %d with text %s\n", s, line_no, yytext);
     exit(1);
 }
 
-int main(int argc, char* argv[]) {
+
+int main(int argc, const char * argv[]) {
     yyin = fopen(argv[1], "rb");
     yyparse();
+    printf("\nVALID!\n");
     fclose(yyin);
-    printf("\n\nSuccess\n\n");
-    return 0;
 }

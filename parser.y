@@ -1,84 +1,302 @@
 %{
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
+int yylex();
+int yyerror(const char *s);
+
+extern char *yytext;
+extern int line_no;
 extern FILE* yyin;
-extern int yylex();
-void yyerror(const char *s);
+
+
 %}
 
-%union {
-    char *str;
-    int num;
-}
 
-%token <str> VARIABLE ATOM STRING
-%token <num> NUMBER
-%token IMPLICATION DOT COMMA LPAREN RPAREN LBRACKET RBRACKET ERROR
+%token ATOM VARIABLE
+%token NUMBER
+%token SQOPBR SQCLBR ENDLINE VERTICAL_PIPE OPERATOR DOT OPBR CLBR COMMA COLON MINUS
 
-%%
+%type termlist predicate term structure subterm
+%type clause
+%type clauselist predicatelist
 
-program: 
-        
-        | program clause DOT{
-            printf("DEBUG: program clause DOT \n ");
-        }
-        ;
-
-clause: 
-    fact {
-        printf("DEBUG: clause: fact \n ");
-    }
-      | rule    |
-      clause IMPLICATION clause
-      ;
-
-fact: ATOM
-    | ATOM LPAREN term_list RPAREN {
-        printf("DEBUG: ATOM LPAREN term_list RPAREN \n ");
-    }
-    ;
-
-rule: head IMPLICATION body {
-    printf("DEBUG: head IMPLICATION body \n ");
-    };
-
-head: ATOM
-    | ATOM LPAREN term_list RPAREN
-    ;
-
-body: term
-    | body COMMA term
-    ;
-
-term: ATOM
-    | VARIABLE
-    | NUMBER
-    | STRING
-    | list
-    ;
-
-term_list: term
-         | term_list COMMA term {
-            printf("DEBUG:term_list COMMA term \n ");
-         }
-         ;
-
-list: LBRACKET RBRACKET
-    | LBRACKET term_list RBRACKET
-    ;
 
 %%
 
-void yyerror(const char *s) {
-    fprintf(stderr, "Ошибка: %s\n", s);
+
+program :
+
+    prolog program  
+    { 
+        printf("Rule: program -> prolog program\n"); 
+    }
+
+    |
+
+    prolog 
+    { 
+        printf("Rule: program -> prolog\n"); 
+    }
+    
+    ;
+
+
+prolog : 
+
+    clauselist ENDLINE
+    { 
+        printf("Rule: prolog -> clauselist ENDLINE\n"); 
+    } 
+
+    |
+
+    ENDLINE
+    {
+        printf("Rule: JUST ENDLINE\n"); 
+    }
+    
+    ;
+
+
+clauselist :
+
+    clause 
+    { 
+        printf("Rule: clauselist -> clause\n"); 
+    }
+
+    | 
+    
+    clauselist clause
+    { 
+        printf("Rule: clauselist -> clauselist clause\n"); 
+    }
+    
+    ;
+
+
+clause : 
+    
+    predicate DOT 
+    { 
+        printf("Rule: clause -> predicate .\n"); 
+    }
+    
+    | 
+    
+    predicate COLON MINUS ENDLINE predicatelist DOT 
+    { 
+        printf("Rule: clause -> predicate :- predicatelist .\n"); 
+    }
+    
+    | 
+    
+    predicate COLON MINUS predicatelist DOT 
+    { 
+        printf("Rule: clause -> predicate :- predicatelist .\n"); 
+    }
+    
+    ;
+       
+
+endlines : 
+    
+    ENDLINE
+    {
+        printf("Rule: endlines -> ENDLINE\n"); 
+    }
+    
+    | 
+    
+    endlines ENDLINE
+    {
+        printf("Rule: endlines -> endlines ENDLINE\n"); 
+    }
+    
+    ;
+
+
+opt_endlines : 
+    
+    |
+    
+    endlines
+    {
+        printf("Rule: opt_endlines -> endlines\n"); 
+    }
+    
+    ;
+
+
+predicatelist : 
+    
+    predicate 
+    { 
+        printf("Rule: predicatelist -> predicate\n"); 
+    }
+    
+    | 
+    
+    predicatelist COMMA opt_endlines predicate 
+    { 
+        printf("Rule: predicatelist -> predicatelist , predicate\n"); 
+    }       
+    
+    |
+    
+    subterm
+    {
+        printf("Rule: predicate -> predicatelist subterm\n"); 
+    }
+    
+    |
+    
+    predicatelist COMMA opt_endlines subterm
+    {
+        printf("Rule: predicatelist COMMA opt_endlines  subterm\n"); 
+    }
+    
+    ;
+
+
+predicate : 
+    
+    ATOM 
+    { 
+        printf("Rule: predicate -> ATOM\n"); 
+    }
+    
+    | 
+    
+    ATOM OPBR termlist CLBR 
+    { 
+        printf("Rule: predicate -> ATOM ( termlist )\n"); 
+    }
+    
+    ;
+
+
+subterm :
+    
+    term OPERATOR term 
+    {
+        printf("Rule: subterm OPERATOR term\n"); 
+    }
+    
+    |
+    
+    term MINUS term
+    {
+        printf("Rule: subterm MINUS term\n"); 
+    }
+    
+    |
+    
+    subterm OPERATOR term
+    {
+        printf("Rule: subterm OPERATOR term\n"); 
+    }
+    
+    |
+    
+    subterm MINUS term
+    {
+        printf("Rule: subterm MINUS term\n"); 
+    }
+    
+    ;
+
+
+termlist : 
+    
+    |
+    
+    term 
+    { 
+        printf("Rule: termlist -> term\n"); 
+    }
+    
+    | 
+    
+    termlist COMMA term 
+    { 
+        printf("Rule: termlist -> termlist , term\n"); 
+    }
+    
+    | 
+    
+    termlist VERTICAL_PIPE term
+    {
+        printf("Rule: termlist -> termlist | term\n"); 
+    }
+    
+    ;
+
+
+term :
+    
+    NUMBER 
+    { 
+        printf("Rule: term -> NUMBER\n"); 
+    }
+    
+    |
+    
+    ATOM 
+    { 
+        printf("Rule: term -> ATOM\n"); 
+    }
+    
+    |
+    
+    VARIABLE 
+    { 
+        printf("Rule: term -> VARIABLE\n"); 
+    }
+    
+    | 
+    
+    structure 
+    { 
+        printf("Rule: term -> structure\n"); 
+    }
+    
+    ;
+
+
+structure :
+    
+    ATOM OPBR termlist CLBR 
+    { 
+        printf("Rule: structure -> ATOM ( termlist )\n"); 
+    }
+    
+    |
+    
+    SQOPBR termlist SQCLBR
+    {
+        printf("Rule: structure -> [] ( termlist )\n"); 
+    }
+    
+    ;
+
+
+%%
+
+
+int yyerror(const char *s)
+{
+    printf("Error: %s on line %d with text %s\n", s, line_no, yytext);
     exit(1);
 }
 
-int main(int argc, char* argv[]) {
+
+int main(int argc, const char * argv[]) {
     yyin = fopen(argv[1], "rb");
     yyparse();
+    printf("\nVALID!\n");
     fclose(yyin);
-    printf("\n\nSuccess\n\n");
-    return 0;
 }

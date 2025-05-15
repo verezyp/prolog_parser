@@ -54,18 +54,20 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    VARIABLE = 258,                /* VARIABLE  */
-    ATOM = 259,                    /* ATOM  */
-    STRING = 260,                  /* STRING  */
-    NUMBER = 261,                  /* NUMBER  */
-    IMPLICATION = 262,             /* IMPLICATION  */
-    DOT = 263,                     /* DOT  */
-    COMMA = 264,                   /* COMMA  */
-    LPAREN = 265,                  /* LPAREN  */
-    RPAREN = 266,                  /* RPAREN  */
-    LBRACKET = 267,                /* LBRACKET  */
-    RBRACKET = 268,                /* RBRACKET  */
-    ERROR = 269                    /* ERROR  */
+    ATOM = 258,                    /* ATOM  */
+    VARIABLE = 259,                /* VARIABLE  */
+    NUMBER = 260,                  /* NUMBER  */
+    SQOPBR = 261,                  /* SQOPBR  */
+    SQCLBR = 262,                  /* SQCLBR  */
+    ENDLINE = 263,                 /* ENDLINE  */
+    VERTICAL_PIPE = 264,           /* VERTICAL_PIPE  */
+    OPERATOR = 265,                /* OPERATOR  */
+    DOT = 266,                     /* DOT  */
+    OPBR = 267,                    /* OPBR  */
+    CLBR = 268,                    /* CLBR  */
+    COMMA = 269,                   /* COMMA  */
+    COLON = 270,                   /* COLON  */
+    MINUS = 271                    /* MINUS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -74,32 +76,24 @@ extern int yydebug;
 #define YYEOF 0
 #define YYerror 256
 #define YYUNDEF 257
-#define VARIABLE 258
-#define ATOM 259
-#define STRING 260
-#define NUMBER 261
-#define IMPLICATION 262
-#define DOT 263
-#define COMMA 264
-#define LPAREN 265
-#define RPAREN 266
-#define LBRACKET 267
-#define RBRACKET 268
-#define ERROR 269
+#define ATOM 258
+#define VARIABLE 259
+#define NUMBER 260
+#define SQOPBR 261
+#define SQCLBR 262
+#define ENDLINE 263
+#define VERTICAL_PIPE 264
+#define OPERATOR 265
+#define DOT 266
+#define OPBR 267
+#define CLBR 268
+#define COMMA 269
+#define COLON 270
+#define MINUS 271
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-union YYSTYPE
-{
-#line 10 "parser.y"
-
-    char *str;
-    int num;
-
-#line 100 "y.tab.h"
-
-};
-typedef union YYSTYPE YYSTYPE;
+typedef int YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif

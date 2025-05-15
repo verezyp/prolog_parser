@@ -14,7 +14,8 @@ Windows:
 - make
 
 # Windows compile
+- *make .c files*
 
 - *run Developer command Prompt for VS*
 
-- cl lex.yy.c y.tab.c polynomlib.c -o labcompiler -DYY_NO_UNISTD_H
+- cl lex.yy.c y.tab.c -o prolog_parser -DYY_NO_UNISTD_H

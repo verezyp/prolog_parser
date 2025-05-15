@@ -2,7 +2,7 @@ location(city_hall).
 location(vacant_lot).
 location([X,C,E]).
 
-
+locCtion(field).
 location(field).
 location(barber_shop, x, E).
 flat(city_hall).
@@ -12,6 +12,7 @@ flat(field).
 
 grassy(city_hall).
 grassy(vacant_lot).
+
 
 murderer(X) :- grassy(X,Y), grassy(Y,Z).
 

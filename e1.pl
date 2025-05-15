@@ -1,0 +1,1 @@
+sTudy(Mark, Book).

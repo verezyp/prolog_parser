@@ -1,5 +1,6 @@
-%option noyywrap nodefault yylineno
 %{
+
+
 #include <stdlib.h>
 #include "y.tab.h"
 #include <stdio.h>
@@ -8,7 +9,12 @@
 int yyerror(const char *);
 int line_no = 1;
 int exit_flag = 0;
+
+
 %}
+
+%option noyywrap nodefault yylineno
+
 
 %%
 
@@ -26,14 +32,14 @@ int exit_flag = 0;
 
 
 [a-z]([a-z]|[A-Z]|[0-9]|_)* {
-    printf("GET TOKEN ATOM (%s)\n", yytext);
-    return ATOM;
+    printf("GET TOKEN COMPONENT_NAME (%s)\n", yytext);
+    return COMPONENT_NAME;
 }
 
 
 (_|[A-Z])([a-z]|[A-Z]|[0-9]|_)* {
-    printf("GET TOKEN VARIABLE (%s)\n", yytext);
-    return VARIABLE;
+    printf("GET TOKEN VAR_NAME (%s)\n", yytext);
+    return VAR_NAME;
 }
 
 
@@ -89,7 +95,6 @@ int exit_flag = 0;
     printf("GET TOKEN VERTICAL_PIPE (|)\n");
     return VERTICAL_PIPE;
 }
-
 
 
 [ \t\f]  ;  

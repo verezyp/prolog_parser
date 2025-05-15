@@ -15,13 +15,7 @@ extern FILE* yyin;
 %}
 
 
-%token ATOM VARIABLE
-%token NUMBER
-%token SQOPBR SQCLBR ENDLINE VERTICAL_PIPE OPERATOR DOT OPBR CLBR COMMA COLON MINUS
-
-%type termlist predicate term structure subterm
-%type clause
-%type clauselist predicatelist
+%token NUMBER COMPONENT_NAME VAR_NAME SQOPBR SQCLBR ENDLINE VERTICAL_PIPE OPERATOR DOT OPBR CLBR COMMA COLON MINUS
 
 
 %%
@@ -29,26 +23,26 @@ extern FILE* yyin;
 
 program :
 
-    prolog program  
+    program base_block  
     { 
-        printf("Rule: program -> prolog program\n"); 
+        printf("Rule: program -> base_block program\n"); 
     }
 
     |
 
-    prolog 
+    base_block 
     { 
-        printf("Rule: program -> prolog\n"); 
+        printf("Rule: program -> base_block\n"); 
     }
     
     ;
 
 
-prolog : 
+base_block : 
 
-    clauselist ENDLINE
+    intergral_expr ENDLINE
     { 
-        printf("Rule: prolog -> clauselist ENDLINE\n"); 
+        printf("Rule: base_block -> intergral_expr ENDLINE\n"); 
     } 
 
     |
@@ -61,42 +55,42 @@ prolog :
     ;
 
 
-clauselist :
+intergral_expr :
 
-    clause 
+    expr 
     { 
-        printf("Rule: clauselist -> clause\n"); 
+        printf("Rule: intergral_expr -> expr\n"); 
     }
 
     | 
     
-    clauselist clause
+    intergral_expr expr   // several exprs in single line    
     { 
-        printf("Rule: clauselist -> clauselist clause\n"); 
+        printf("Rule: intergral_expr -> intergral_expr expr\n"); 
     }
     
     ;
 
 
-clause : 
+expr : 
     
-    predicate DOT 
+    component DOT 
     { 
-        printf("Rule: clause -> predicate .\n"); 
+        printf("Rule: expr -> component DOT\n"); 
     }
     
     | 
     
-    predicate COLON MINUS ENDLINE predicatelist DOT 
+    component COLON MINUS ENDLINE list_components DOT 
     { 
-        printf("Rule: clause -> predicate :- predicatelist .\n"); 
+        printf("Rule: expr -> component COLON MINUS ENDLINE list_components DOT\n"); 
     }
     
     | 
     
-    predicate COLON MINUS predicatelist DOT 
+    component COLON MINUS list_components DOT 
     { 
-        printf("Rule: clause -> predicate :- predicatelist .\n"); 
+        printf("Rule: expr -> component COLON MINUS list_components DOT \n"); 
     }
     
     ;
@@ -131,49 +125,49 @@ opt_endlines :
     ;
 
 
-predicatelist : 
+list_components : 
     
-    predicate 
+    component 
     { 
-        printf("Rule: predicatelist -> predicate\n"); 
+        printf("Rule: list_components -> component\n"); 
     }
     
     | 
     
-    predicatelist COMMA opt_endlines predicate 
+    list_components COMMA opt_endlines component 
     { 
-        printf("Rule: predicatelist -> predicatelist , predicate\n"); 
+        printf("Rule: list_components -> list_components , component\n"); 
     }       
     
     |
     
     subterm
     {
-        printf("Rule: predicate -> predicatelist subterm\n"); 
+        printf("Rule: component -> list_components subterm\n"); 
     }
     
     |
     
-    predicatelist COMMA opt_endlines subterm
+    list_components COMMA opt_endlines subterm
     {
-        printf("Rule: predicatelist COMMA opt_endlines  subterm\n"); 
+        printf("Rule: list_components COMMA opt_endlines  subterm\n"); 
     }
     
     ;
 
 
-predicate : 
+component : 
     
-    ATOM 
+    COMPONENT_NAME 
     { 
-        printf("Rule: predicate -> ATOM\n"); 
+        printf("Rule: component -> COMPONENT_NAME\n"); 
     }
     
     | 
     
-    ATOM OPBR termlist CLBR 
+    COMPONENT_NAME OPBR listterms CLBR 
     { 
-        printf("Rule: predicate -> ATOM ( termlist )\n"); 
+        printf("Rule: component -> COMPONENT_NAME ( listterms )\n"); 
     }
     
     ;
@@ -210,27 +204,27 @@ subterm :
     ;
 
 
-termlist : 
+listterms : 
     
     |
     
     term 
     { 
-        printf("Rule: termlist -> term\n"); 
+        printf("Rule: listterms -> term\n"); 
     }
     
     | 
     
-    termlist COMMA term 
+    listterms COMMA term 
     { 
-        printf("Rule: termlist -> termlist , term\n"); 
+        printf("Rule: listterms -> listterms , term\n"); 
     }
     
     | 
     
-    termlist VERTICAL_PIPE term
+    listterms VERTICAL_PIPE term
     {
-        printf("Rule: termlist -> termlist | term\n"); 
+        printf("Rule: listterms -> listterms | term\n"); 
     }
     
     ;
@@ -245,40 +239,40 @@ term :
     
     |
     
-    ATOM 
+    COMPONENT_NAME 
     { 
-        printf("Rule: term -> ATOM\n"); 
+        printf("Rule: term -> COMPONENT_NAME\n"); 
     }
     
     |
     
-    VARIABLE 
+    VAR_NAME 
     { 
-        printf("Rule: term -> VARIABLE\n"); 
+        printf("Rule: term -> VAR_NAME\n"); 
     }
     
     | 
     
-    structure 
+    bracket_term 
     { 
-        printf("Rule: term -> structure\n"); 
+        printf("Rule: term -> bracket_term\n"); 
     }
     
     ;
 
 
-structure :
+bracket_term :
     
-    ATOM OPBR termlist CLBR 
+    COMPONENT_NAME OPBR listterms CLBR 
     { 
-        printf("Rule: structure -> ATOM ( termlist )\n"); 
+        printf("Rule: bracket_term -> COMPONENT_NAME ( listterms )\n"); 
     }
     
     |
     
-    SQOPBR termlist SQCLBR
+    SQOPBR listterms SQCLBR
     {
-        printf("Rule: structure -> [] ( termlist )\n"); 
+        printf("Rule: bracket_term -> [] ( listterms )\n"); 
     }
     
     ;

@@ -5,4 +5,4 @@ all:
 
 
 clean:
-	rm -f y.tab* prolog_parser* lex.yy.c *obj parser.tab*
+	rm -f y.tab* prolog_parser* lex.yy.c *obj parser.tab* *.exe

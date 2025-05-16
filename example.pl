@@ -8,9 +8,9 @@ location(barber_shop, x, E).
 flat(city_hall).
 flat(vacant_lot).
 flat(field).
+%prolog
 
-
-grassy(city_hall).
+% grassy(city_hall).
 grassy(vacant_lot).
 
 
@@ -69,6 +69,7 @@ showsolution(C, M, RC, RM, [go(-1, DC, DM)|Sol]) :-
     N_sqrt >= M,
     N_prime is N+1.
 
+
 factorization_prime(N, M, L) :-
     N_sqrt is sqrt(N),
     N_sqrt >= M,
@@ -76,7 +77,7 @@ factorization_prime(N, M, L) :-
     R is N rem M,
     R == 0,
     D is N div M,
-
+    S = E - 34,
     L = [].
 
 

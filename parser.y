@@ -8,7 +8,7 @@ int yylex();
 int yyerror(const char *s);
 
 extern char *yytext;
-extern int line_no;
+extern int line_number;
 extern FILE* yyin;
 
 
@@ -25,7 +25,7 @@ program :
 
     program base_block  
     { 
-        printf("Rule: program -> base_block program\n"); 
+        printf("Rule: program -> program base_block\n"); 
     }
 
     |
@@ -175,6 +175,20 @@ component :
 
 subterm :
     
+    OPBR subterm CLBR
+    {
+        printf("Rule: OPBR subterm CLBR\n");
+    }
+    
+    |
+
+    term OPERATOR OPBR subterm CLBR
+    {
+         printf("Rule: term OPERATOR OPBR subterm CLBR\n");
+    }
+
+    |
+
     term OPERATOR term 
     {
         printf("Rule: subterm OPERATOR term\n"); 
@@ -215,7 +229,7 @@ listterms :
     
     | 
     
-    listterms COMMA term 
+    listterms COMMA opt_endlines term 
     { 
         printf("Rule: listterms -> listterms , term\n"); 
     }
@@ -283,7 +297,7 @@ bracket_term :
 
 int yyerror(const char *s)
 {
-    printf("Error: %s on line %d with text %s\n", s, line_no, yytext);
+    printf("Error: %s on line %d: %s\n", s, line_number, yytext);
     exit(1);
 }
 

@@ -7,7 +7,7 @@
 #include <string.h>
 
 int yyerror(const char *);
-int line_no = 1;
+int line_number = 1;
 int exit_flag = 0;
 
 
@@ -40,6 +40,11 @@ int exit_flag = 0;
 (_|[A-Z])([a-z]|[A-Z]|[0-9]|_)* {
     printf("GET TOKEN VAR_NAME (%s)\n", yytext);
     return VAR_NAME;
+}
+
+
+%[^\n]*  { 
+    printf("GET TOKEN COMMENT (%s)\n", yytext);
 }
 
 
@@ -97,11 +102,17 @@ int exit_flag = 0;
 }
 
 
+";" {
+    printf("GET TOKEN SEMICOLON (;)\n");
+    return COMMA;
+}
+
+
 [ \t\f]  ;  
 
 
 \n {
-    line_no++;
+    line_number++;
     printf("GET TOKEN ENDLINE\n");
     return ENDLINE;
 }
@@ -122,6 +133,6 @@ int exit_flag = 0;
 
 
 . {
-    fprintf(stderr, "Error: invalid character (%s) at line %d\n", yytext, line_no);
+    fprintf(stderr, "Error: invalid character (%s) at line %d\n", yytext, line_number);
     yyerror("invalid character");
 }

@@ -1,0 +1,1212 @@
+GET TOKEN COMPONENT_NAME (location)
+GET OPBR
+GET TOKEN COMPONENT_NAME (city_hall)
+GET CLBR
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> term
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block
+GET TOKEN COMPONENT_NAME (location)
+GET OPBR
+GET TOKEN COMPONENT_NAME (vacant_lot)
+GET CLBR
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> term
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (location)
+GET OPBR
+GET TOKEN SQOPBR ([)
+GET TOKEN VAR_NAME (X)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (C)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (E)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET TOKEN SQCLBR (])
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (locCtion)
+GET OPBR
+GET TOKEN COMPONENT_NAME (field)
+GET CLBR
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> term
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (location)
+GET OPBR
+GET TOKEN COMPONENT_NAME (field)
+GET CLBR
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> term
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (location)
+GET OPBR
+GET TOKEN COMPONENT_NAME (barber_shop)
+GET COMMA
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> term
+GET TOKEN COMPONENT_NAME (x)
+GET COMMA
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> listterms , term
+GET TOKEN VAR_NAME (E)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (flat)
+GET OPBR
+GET TOKEN COMPONENT_NAME (city_hall)
+GET CLBR
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> term
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (flat)
+GET OPBR
+GET TOKEN COMPONENT_NAME (vacant_lot)
+GET CLBR
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> term
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (flat)
+GET OPBR
+GET TOKEN COMPONENT_NAME (field)
+GET CLBR
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> term
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMMENT (%prolog)
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMMENT (% grassy(city_hall).)
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (grassy)
+GET OPBR
+GET TOKEN COMPONENT_NAME (vacant_lot)
+GET CLBR
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> term
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (murderer)
+GET OPBR
+GET TOKEN VAR_NAME (X)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET COLON
+GET MINUS
+GET TOKEN COMPONENT_NAME (grassy)
+GET OPBR
+GET TOKEN VAR_NAME (X)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (Y)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET COMMA
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> component
+GET TOKEN COMPONENT_NAME (grassy)
+GET OPBR
+GET TOKEN VAR_NAME (Y)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (Z)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET TOKEN DOT
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> list_components , component
+Rule: expr -> component COLON MINUS list_components DOT 
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (murderer)
+GET OPBR
+GET TOKEN VAR_NAME (X)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET COLON
+GET MINUS
+GET TOKEN ENDLINE
+GET TOKEN COMPONENT_NAME (grassy)
+GET OPBR
+GET TOKEN VAR_NAME (X)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (Y)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET COMMA
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> component
+GET TOKEN COMPONENT_NAME (grassy)
+GET OPBR
+GET TOKEN VAR_NAME (Y)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (Z)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET TOKEN DOT
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> list_components , component
+Rule: expr -> component COLON MINUS ENDLINE list_components DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (murderer)
+GET OPBR
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET COLON
+GET MINUS
+GET TOKEN ENDLINE
+GET TOKEN COMPONENT_NAME (member)
+GET OPBR
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (Witnesses)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET COMMA
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> component
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN COMPONENT_NAME (select)
+Rule: opt_endlines -> endlines
+GET OPBR
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN SQOPBR ([)
+GET TOKEN COMPONENT_NAME (a)
+GET COMMA
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> term
+GET TOKEN COMPONENT_NAME (b)
+GET COMMA
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> listterms , term
+GET TOKEN COMPONENT_NAME (c)
+GET TOKEN SQCLBR (])
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> listterms , term
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (Witnesses)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET COMMA
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> list_components , component
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN COMPONENT_NAME (consistent)
+Rule: opt_endlines -> endlines
+GET OPBR
+GET TOKEN VAR_NAME (Witnesses)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET CLBR
+GET TOKEN DOT
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> list_components , component
+Rule: expr -> component COLON MINUS ENDLINE list_components DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (murderer)
+GET OPBR
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET COLON
+GET MINUS
+GET TOKEN ENDLINE
+GET TOKEN COMPONENT_NAME (member)
+GET OPBR
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (Witnesses)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET COMMA
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> component
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN COMPONENT_NAME (select)
+Rule: opt_endlines -> endlines
+GET OPBR
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN SQOPBR ([)
+GET TOKEN COMPONENT_NAME (grassy)
+GET OPBR
+GET TOKEN COMPONENT_NAME (city_hall)
+GET CLBR
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> term
+Rule: bracket_term -> COMPONENT_NAME ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> term
+GET COMMA
+GET TOKEN COMPONENT_NAME (b)
+GET COMMA
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> listterms , term
+GET TOKEN COMPONENT_NAME (c)
+GET TOKEN SQCLBR (])
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> listterms , term
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (Witnesses)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET COMMA
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> list_components , component
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN COMPONENT_NAME (consistent)
+Rule: opt_endlines -> endlines
+GET OPBR
+GET TOKEN VAR_NAME (Witnesses)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET CLBR
+GET TOKEN DOT
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> list_components , component
+Rule: expr -> component COLON MINUS ENDLINE list_components DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (showsolution)
+GET OPBR
+GET TOKEN VAR_NAME (_)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (_)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (_)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (_)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN SQOPBR ([)
+GET TOKEN SQCLBR (])
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (cannibals)
+GET OPBR
+GET TOKEN VAR_NAME (_)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN NUMBER (0)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN NUMBER (0)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (_)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (_)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (_)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (List)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (List)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (canoeCarries)
+GET OPBR
+GET TOKEN NUMBER (1)
+Rule: term -> NUMBER
+Rule: listterms -> term
+GET COMMA
+GET TOKEN NUMBER (0)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (canoeCarries)
+GET OPBR
+GET TOKEN NUMBER (0)
+Rule: term -> NUMBER
+Rule: listterms -> term
+GET COMMA
+GET TOKEN NUMBER (1)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (canoeCarries)
+GET OPBR
+GET TOKEN NUMBER (1)
+Rule: term -> NUMBER
+Rule: listterms -> term
+GET COMMA
+GET TOKEN NUMBER (1)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (canoeCarries)
+GET OPBR
+GET TOKEN NUMBER (2)
+Rule: term -> NUMBER
+Rule: listterms -> term
+GET COMMA
+GET TOKEN NUMBER (0)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (canoeCarries)
+GET OPBR
+GET TOKEN NUMBER (0)
+Rule: term -> NUMBER
+Rule: listterms -> term
+GET COMMA
+GET TOKEN NUMBER (2)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (go)
+GET COLON
+Rule: component -> COMPONENT_NAME
+GET MINUS
+GET TOKEN ENDLINE
+GET TOKEN COMPONENT_NAME (cannibals)
+GET OPBR
+GET TOKEN NUMBER (-1)
+Rule: term -> NUMBER
+Rule: listterms -> term
+GET COMMA
+GET TOKEN NUMBER (3)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN NUMBER (3)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN NUMBER (0)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN NUMBER (0)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN SQOPBR ([)
+GET TOKEN COMPONENT_NAME (canoe)
+GET OPBR
+GET TOKEN NUMBER (-1)
+Rule: term -> NUMBER
+Rule: listterms -> term
+GET COMMA
+GET TOKEN NUMBER (3)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN NUMBER (3)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: bracket_term -> COMPONENT_NAME ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> term
+GET TOKEN SQCLBR (])
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN SQOPBR ([)
+GET TOKEN SQCLBR (])
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (Complete)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET COMMA
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> component
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN COMPONENT_NAME (reverse)
+Rule: opt_endlines -> endlines
+GET OPBR
+GET TOKEN VAR_NAME (Complete)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (NC)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET COMMA
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> list_components , component
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN COMPONENT_NAME (showsolution)
+Rule: opt_endlines -> endlines
+GET OPBR
+GET TOKEN NUMBER (3)
+Rule: term -> NUMBER
+Rule: listterms -> term
+GET COMMA
+GET TOKEN NUMBER (3)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN NUMBER (0)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN NUMBER (0)
+Rule: term -> NUMBER
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (NC)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET TOKEN DOT
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> list_components , component
+Rule: expr -> component COLON MINUS ENDLINE list_components DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (showsolution)
+GET OPBR
+GET TOKEN VAR_NAME (C)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (RC)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (RM)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN SQOPBR ([)
+GET TOKEN COMPONENT_NAME (go)
+GET OPBR
+GET TOKEN NUMBER (-1)
+Rule: term -> NUMBER
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (DC)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (DM)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: bracket_term -> COMPONENT_NAME ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> term
+GET TOKEN VERTICAL_PIPE (|)
+GET TOKEN VAR_NAME (Sol)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms | term
+GET TOKEN SQCLBR (])
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET COLON
+GET MINUS
+GET TOKEN ENDLINE
+GET TOKEN COMPONENT_NAME (member)
+GET OPBR
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (Witnesses)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET COMMA
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> component
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN COMPONENT_NAME (select)
+Rule: opt_endlines -> endlines
+GET OPBR
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN SQOPBR ([)
+GET TOKEN COMPONENT_NAME (grassy)
+GET OPBR
+GET TOKEN COMPONENT_NAME (city_hall)
+GET CLBR
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> term
+Rule: bracket_term -> COMPONENT_NAME ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> term
+GET COMMA
+GET TOKEN COMPONENT_NAME (b)
+GET COMMA
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> listterms , term
+GET TOKEN COMPONENT_NAME (c)
+GET TOKEN SQCLBR (])
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> listterms , term
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (Witnesses)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET COMMA
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> list_components , component
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN COMPONENT_NAME (consistent)
+Rule: opt_endlines -> endlines
+GET OPBR
+GET TOKEN VAR_NAME (Witnesses)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET CLBR
+GET TOKEN DOT
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> list_components , component
+Rule: expr -> component COLON MINUS ENDLINE list_components DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (head)
+GET OPBR
+GET TOKEN SQOPBR ([)
+GET TOKEN VAR_NAME (X)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET TOKEN VERTICAL_PIPE (|)
+GET TOKEN VAR_NAME (Y)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms | term
+GET TOKEN SQCLBR (])
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (X)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (tail)
+GET OPBR
+GET TOKEN SQOPBR ([)
+GET TOKEN VAR_NAME (X)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET TOKEN VERTICAL_PIPE (|)
+GET TOKEN VAR_NAME (Y)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms | term
+GET TOKEN SQCLBR (])
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (Y)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (tail)
+GET OPBR
+GET TOKEN SQOPBR ([)
+GET TOKEN VAR_NAME (X)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET TOKEN VERTICAL_PIPE (|)
+GET TOKEN SQOPBR ([)
+GET TOKEN SQCLBR (])
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> listterms | term
+GET TOKEN SQCLBR (])
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> term
+GET COMMA
+GET TOKEN SQOPBR ([)
+GET TOKEN SQCLBR (])
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET TOKEN DOT
+Rule: expr -> component DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (showsolution)
+GET OPBR
+GET TOKEN VAR_NAME (C)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (RC)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (RM)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN SQOPBR ([)
+GET TOKEN COMPONENT_NAME (go)
+GET OPBR
+GET TOKEN NUMBER (-1)
+Rule: term -> NUMBER
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (DC)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (DM)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: bracket_term -> COMPONENT_NAME ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> term
+GET TOKEN VERTICAL_PIPE (|)
+GET TOKEN VAR_NAME (Sol)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms | term
+GET TOKEN SQCLBR (])
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET COLON
+GET MINUS
+GET TOKEN ENDLINE
+GET TOKEN COMPONENT_NAME (member)
+GET OPBR
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (Witnesses)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET COMMA
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> component
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN COMPONENT_NAME (select)
+Rule: opt_endlines -> endlines
+GET OPBR
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN SQOPBR ([)
+GET TOKEN COMPONENT_NAME (grassy)
+GET OPBR
+GET TOKEN COMPONENT_NAME (city_hall)
+GET CLBR
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> term
+Rule: bracket_term -> COMPONENT_NAME ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> term
+GET COMMA
+GET TOKEN COMPONENT_NAME (b)
+GET COMMA
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> listterms , term
+GET TOKEN COMPONENT_NAME (c)
+GET TOKEN SQCLBR (])
+Rule: term -> COMPONENT_NAME
+Rule: listterms -> listterms , term
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (Witnesses)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+GET COMMA
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> list_components , component
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN COMPONENT_NAME (consistent)
+Rule: opt_endlines -> endlines
+GET OPBR
+GET TOKEN VAR_NAME (Witnesses)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET CLBR
+GET COMMA
+Rule: component -> COMPONENT_NAME ( listterms )
+Rule: list_components -> list_components , component
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN VAR_NAME (N_sqrt)
+Rule: opt_endlines -> endlines
+Rule: term -> VAR_NAME
+GET TOKEN OPERATOR (>=)
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: subterm OPERATOR term
+GET COMMA
+Rule: list_components COMMA opt_endlines  subterm
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN VAR_NAME (N_prime)
+Rule: opt_endlines -> endlines
+Rule: term -> VAR_NAME
+GET TOKEN OPERATOR (is)
+GET TOKEN VAR_NAME (N)
+Rule: term -> VAR_NAME
+Rule: subterm OPERATOR term
+GET TOKEN OPERATOR (+)
+GET TOKEN NUMBER (1)
+Rule: term -> NUMBER
+Rule: subterm OPERATOR term
+GET TOKEN DOT
+Rule: list_components COMMA opt_endlines  subterm
+Rule: expr -> component COLON MINUS ENDLINE list_components DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN COMPONENT_NAME (factorization_prime)
+GET OPBR
+GET TOKEN VAR_NAME (N)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET COMMA
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET COMMA
+GET TOKEN VAR_NAME (L)
+Rule: term -> VAR_NAME
+Rule: listterms -> listterms , term
+GET CLBR
+Rule: component -> COMPONENT_NAME ( listterms )
+GET COLON
+GET MINUS
+GET TOKEN ENDLINE
+GET TOKEN VAR_NAME (N_sqrt)
+Rule: term -> VAR_NAME
+GET TOKEN OPERATOR (is)
+GET TOKEN COMPONENT_NAME (sqrt)
+GET OPBR
+GET TOKEN VAR_NAME (N)
+Rule: term -> VAR_NAME
+Rule: listterms -> term
+GET CLBR
+Rule: bracket_term -> COMPONENT_NAME ( listterms )
+Rule: term -> bracket_term
+Rule: subterm OPERATOR term
+GET COMMA
+Rule: component -> list_components subterm
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN VAR_NAME (N_sqrt)
+Rule: opt_endlines -> endlines
+Rule: term -> VAR_NAME
+GET TOKEN OPERATOR (>=)
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: subterm OPERATOR term
+GET COMMA
+Rule: list_components COMMA opt_endlines  subterm
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN ENDLINE
+Rule: endlines -> endlines ENDLINE
+GET TOKEN VAR_NAME (R)
+Rule: opt_endlines -> endlines
+Rule: term -> VAR_NAME
+GET TOKEN OPERATOR (is)
+GET TOKEN VAR_NAME (N)
+Rule: term -> VAR_NAME
+Rule: subterm OPERATOR term
+GET TOKEN OPERATOR (rem)
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: subterm OPERATOR term
+GET COMMA
+Rule: list_components COMMA opt_endlines  subterm
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN VAR_NAME (R)
+Rule: opt_endlines -> endlines
+Rule: term -> VAR_NAME
+GET TOKEN OPERATOR (==)
+GET TOKEN NUMBER (0)
+Rule: term -> NUMBER
+Rule: subterm OPERATOR term
+GET COMMA
+Rule: list_components COMMA opt_endlines  subterm
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN VAR_NAME (D)
+Rule: opt_endlines -> endlines
+Rule: term -> VAR_NAME
+GET TOKEN OPERATOR (is)
+GET TOKEN VAR_NAME (N)
+Rule: term -> VAR_NAME
+Rule: subterm OPERATOR term
+GET TOKEN OPERATOR (div)
+GET TOKEN VAR_NAME (M)
+Rule: term -> VAR_NAME
+Rule: subterm OPERATOR term
+GET COMMA
+Rule: list_components COMMA opt_endlines  subterm
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN VAR_NAME (S)
+Rule: opt_endlines -> endlines
+Rule: term -> VAR_NAME
+GET TOKEN OPERATOR (=)
+GET TOKEN VAR_NAME (E)
+Rule: term -> VAR_NAME
+Rule: subterm OPERATOR term
+GET MINUS
+GET TOKEN NUMBER (34)
+Rule: term -> NUMBER
+Rule: subterm MINUS term
+GET COMMA
+Rule: list_components COMMA opt_endlines  subterm
+GET TOKEN ENDLINE
+Rule: endlines -> ENDLINE
+GET TOKEN VAR_NAME (L)
+Rule: opt_endlines -> endlines
+Rule: term -> VAR_NAME
+GET TOKEN OPERATOR (=)
+GET TOKEN SQOPBR ([)
+GET TOKEN SQCLBR (])
+Rule: bracket_term -> [] ( listterms )
+Rule: term -> bracket_term
+Rule: subterm OPERATOR term
+GET TOKEN DOT
+Rule: list_components COMMA opt_endlines  subterm
+Rule: expr -> component COLON MINUS ENDLINE list_components DOT
+Rule: intergral_expr -> expr
+GET TOKEN ENDLINE
+Rule: base_block -> intergral_expr ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+GET TOKEN ENDLINE
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+Rule: JUST ENDLINE
+Rule: program -> base_block program
+
+VALID!

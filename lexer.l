@@ -133,6 +133,6 @@ int exit_flag = 0;
 
 
 . {
-    fprintf(stderr, "Error: invalid character (%s) at line %d\n", yytext, line_number);
-    yyerror("invalid character");
+    //fprintf(stderr, "Error: invalid character (%s) at line %d\n", yytext, line_number);
+    yyerror("Invalid character");
 }

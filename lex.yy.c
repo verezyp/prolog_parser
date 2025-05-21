@@ -948,8 +948,8 @@ case 18:
 YY_RULE_SETUP
 #line 135 "lexer.l"
 {
-    fprintf(stderr, "Error: invalid character (%s) at line %d\n", yytext, line_number);
-    yyerror("invalid character");
+    //fprintf(stderr, "Error: invalid character (%s) at line %d\n", yytext, line_number);
+    yyerror("Invalid character");
 }
 	YY_BREAK
 case 19:

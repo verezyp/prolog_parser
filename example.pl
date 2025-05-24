@@ -22,7 +22,7 @@ murderer(X) :-
 
 murderer(M) :-
     member(M, Witnesses),
-    select(M, [a,b,c], Witnesses),
+    select(M, [a,'62378903211лвылвлв',c], Witnesses),
     consistent(Witnesses).
 murderer(M) :-
     member(M, Witnesses),
@@ -43,12 +43,12 @@ canoeCarries(0,2).
 
 
 go :-
-    cannibals(-1, 3, 3, 0, 0, [canoe(-1,3,3)], [], Complete),
+    cannibals(-1, 3, 3, 0, 0, [canoe(1,3,3)], [], Complete),
     reverse(Complete , NC),
     showsolution(3 , 3 , 0, 0, NC).
 
 
-showsolution(C, M, RC, RM, [go(-1, DC, DM)|Sol]) :-
+showsolution(C, M, RC, RM, [go(1, DC, DM)|Sol]) :-
     member(M, Witnesses),
     select(M, [grassy(city_hall), b, c], Witnesses),
     consistent(Witnesses).
@@ -62,7 +62,7 @@ tail([X | Y], Y).
 tail([X | []], []).
 
 
-showsolution(C, M, RC, RM, [go(-1, DC, DM)|Sol]) :-
+showsolution(C, M, RC, RM, [go(1, DC, DM)|Sol]) :-
     member(M, Witnesses),
     select(M, [grassy(city_hall), b, c], Witnesses),
     consistent(Witnesses),
@@ -81,5 +81,4 @@ factorization_prime(N, M, L) :-
     L = [].
 
 
-
-    
+format('text text text text').

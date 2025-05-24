@@ -59,15 +59,16 @@ extern int yydebug;
     VAR_NAME = 260,                /* VAR_NAME  */
     SQOPBR = 261,                  /* SQOPBR  */
     SQCLBR = 262,                  /* SQCLBR  */
-    ENDLINE = 263,                 /* ENDLINE  */
-    VERTICAL_PIPE = 264,           /* VERTICAL_PIPE  */
-    OPERATOR = 265,                /* OPERATOR  */
-    DOT = 266,                     /* DOT  */
-    OPBR = 267,                    /* OPBR  */
-    CLBR = 268,                    /* CLBR  */
-    COMMA = 269,                   /* COMMA  */
-    COLON = 270,                   /* COLON  */
-    MINUS = 271                    /* MINUS  */
+    VERTICAL_PIPE = 263,           /* VERTICAL_PIPE  */
+    OPERATOR = 264,                /* OPERATOR  */
+    DOT = 265,                     /* DOT  */
+    OPBR = 266,                    /* OPBR  */
+    CLBR = 267,                    /* CLBR  */
+    COMMA = 268,                   /* COMMA  */
+    COLON = 269,                   /* COLON  */
+    MINUS = 270,                   /* MINUS  */
+    STRING = 271,                  /* STRING  */
+    CUT = 272                      /* CUT  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -81,15 +82,16 @@ extern int yydebug;
 #define VAR_NAME 260
 #define SQOPBR 261
 #define SQCLBR 262
-#define ENDLINE 263
-#define VERTICAL_PIPE 264
-#define OPERATOR 265
-#define DOT 266
-#define OPBR 267
-#define CLBR 268
-#define COMMA 269
-#define COLON 270
-#define MINUS 271
+#define VERTICAL_PIPE 263
+#define OPERATOR 264
+#define DOT 265
+#define OPBR 266
+#define CLBR 267
+#define COMMA 268
+#define COLON 269
+#define MINUS 270
+#define STRING 271
+#define CUT 272
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

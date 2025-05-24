@@ -15,7 +15,7 @@ extern FILE* yyin;
 %}
 
 
-%token NUMBER COMPONENT_NAME VAR_NAME SQOPBR SQCLBR ENDLINE VERTICAL_PIPE OPERATOR DOT OPBR CLBR COMMA COLON MINUS
+%token NUMBER COMPONENT_NAME VAR_NAME SQOPBR SQCLBR VERTICAL_PIPE OPERATOR DOT OPBR CLBR COMMA COLON MINUS STRING CUT
 
 
 %%
@@ -40,17 +40,10 @@ program :
 
 base_block : 
 
-    intergral_expr ENDLINE
+    intergral_expr DOT
     { 
         printf("Rule: base_block -> intergral_expr ENDLINE\n"); 
     } 
-
-    |
-
-    ENDLINE
-    {
-        printf("Rule: JUST ENDLINE\n"); 
-    }
     
     ;
 
@@ -74,21 +67,21 @@ intergral_expr :
 
 expr : 
     
-    component DOT 
+    component 
     { 
         printf("Rule: expr -> component DOT\n"); 
     }
     
     | 
     
-    component COLON MINUS ENDLINE list_components DOT 
+    component COLON MINUS  list_components   
     { 
         printf("Rule: expr -> component COLON MINUS ENDLINE list_components DOT\n"); 
     }
     
     | 
     
-    component COLON MINUS list_components DOT 
+    component COLON MINUS list_components   
     { 
         printf("Rule: expr -> component COLON MINUS list_components DOT \n"); 
     }
@@ -96,7 +89,7 @@ expr :
     ;
        
 
-endlines : 
+/* endlines : 
     
     ENDLINE
     {
@@ -110,23 +103,24 @@ endlines :
         printf("Rule: endlines -> endlines ENDLINE\n"); 
     }
     
-    ;
+    ; */
 
 
-opt_endlines : 
+  /* : 
     
     |
     
     endlines
     {
-        printf("Rule: opt_endlines -> endlines\n"); 
+        printf("Rule:   -> endlines\n"); 
     }
     
-    ;
+    ; */
 
 
 list_components : 
     
+
     component 
     { 
         printf("Rule: list_components -> component\n"); 
@@ -134,7 +128,15 @@ list_components :
     
     | 
     
-    list_components COMMA opt_endlines component 
+    list_components COMMA   component 
+    { 
+        printf("Rule: list_components -> list_components , component\n"); 
+    }       
+    
+    |
+    
+
+    list_components   COMMA   component 
     { 
         printf("Rule: list_components -> list_components , component\n"); 
     }       
@@ -148,16 +150,22 @@ list_components :
     
     |
     
-    list_components COMMA opt_endlines subterm
+    list_components COMMA   subterm
     {
-        printf("Rule: list_components COMMA opt_endlines  subterm\n"); 
+        printf("Rule: list_components COMMA    subterm\n"); 
     }
     
+
     ;
 
 
 component : 
-    
+    CUT 
+    {
+        printf("Rule: term -> CUT\n");
+    }
+
+    |
     COMPONENT_NAME 
     { 
         printf("Rule: component -> COMPONENT_NAME\n"); 
@@ -170,7 +178,25 @@ component :
         printf("Rule: component -> COMPONENT_NAME ( listterms )\n"); 
     }
     
+    |
+    
+    OPBR list_components CLBR 
+    {
+
+    }
+    
+    
+
+
     ;
+
+
+/* uminus  :
+
+    MINUS term
+    {
+        printf("Rule: uminus MINUS term\n");
+    } */
 
 
 subterm :
@@ -194,12 +220,12 @@ subterm :
         printf("Rule: subterm OPERATOR term\n"); 
     }
     
-    |
+    /* |
     
-    term MINUS term
+    term uminus
     {
         printf("Rule: subterm MINUS term\n"); 
-    }
+    } */
     
     |
     
@@ -214,7 +240,7 @@ subterm :
     {
         printf("Rule: subterm MINUS term\n"); 
     }
-    
+
     ;
 
 
@@ -229,7 +255,7 @@ listterms :
     
     | 
     
-    listterms COMMA opt_endlines term 
+    listterms COMMA   term 
     { 
         printf("Rule: listterms -> listterms , term\n"); 
     }
@@ -240,12 +266,32 @@ listterms :
     {
         printf("Rule: listterms -> listterms | term\n"); 
     }
+
+    |
+
+    OPBR listterms CLBR
+    {
+         printf("Rule: listterms -> OPBR listterms CLBR\n"); 
+    }
     
     ;
 
 
 term :
     
+    MINUS term {
+        printf("Rule: term -> MINUS term\n"); 
+    }
+
+    |
+
+    STRING
+    {
+        printf("Rule: term -> STRING\n"); 
+    }
+
+    |
+
     NUMBER 
     { 
         printf("Rule: term -> NUMBER\n"); 
@@ -271,6 +317,13 @@ term :
     { 
         printf("Rule: term -> bracket_term\n"); 
     }
+
+    |
+
+    OPBR listterms CLBR
+    {
+        
+    }
     
     ;
 
@@ -289,6 +342,13 @@ bracket_term :
         printf("Rule: bracket_term -> [] ( listterms )\n"); 
     }
     
+    | 
+
+    OPBR listterms COLON MINUS listterms CLBR
+    {
+
+    }
+
     ;
 
 

@@ -19,13 +19,13 @@ int exit_flag = 0;
 %%
 
 
-"=="|"mod"|"rem"|"div"|"is"|"="|"<="|"<"|">="|">"|\+|\*|\/ {
+"=="|"mod"|"rem"|"div"|"is"|"=<"|"=>"|"="|"=\\="|"<="|"<"|">="|">"|\+|\*|\/ {
     printf("GET TOKEN OPERATOR (%s)\n", yytext);
     return OPERATOR;
 }
 
 
-(-)?[0-9]+ {
+[0-9]+ {
     printf("GET TOKEN NUMBER (%s)\n", yytext);
     return NUMBER;
 }
@@ -108,13 +108,29 @@ int exit_flag = 0;
 }
 
 
+'([^'\\]|\\.)*' {
+    printf("GET TOKEN STRING (%s)\n", yytext);
+    return STRING;
+}
+
+\"([^"\\]|\\.)*\" {
+    printf("GET TOKEN STRING (%s)\n", yytext);
+    return STRING;
+}
+
+"!" {
+    printf("GET TOKEN STRING (%s)\n", yytext);
+    return CUT;
+}
+
+
 [ \t\f]  ;  
 
 
 \n {
     line_number++;
     printf("GET TOKEN ENDLINE\n");
-    return ENDLINE;
+    // return ENDLINE;
 }
 
 
@@ -127,12 +143,11 @@ int exit_flag = 0;
     else
     {
         exit_flag = 1;
-        return ENDLINE; 
+        // return ENDLINE; 
     }
 } 
 
 
 . {
-    //fprintf(stderr, "Error: invalid character (%s) at line %d\n", yytext, line_number);
     yyerror("Invalid character");
 }

@@ -108,7 +108,7 @@ int exit_flag = 0;
 }
 
 
-'([^'\\]|\\.)*' {
+'([^'\\]|\\.|\\\n)*' {
     printf("GET TOKEN STRING (%s)\n", yytext);
     return STRING;
 }

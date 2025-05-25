@@ -1,6 +1,6 @@
-user@DESKTOP-D7MVOD0:/mnt/c/testprog/compilers/curswork$ yacc -d parser.y -Wcounterexamples -Wother
-parser.y: warning: 4 shift/reduce conflicts [-Wconflicts-sr]
-parser.y: warning: 19 reduce/reduce conflicts [-Wconflicts-rr]
+user@DESKTOP-D7MVOD0:/mnt/c/testprog/compilers/curswork$ yacc -d parser.y -Wcounterexamples
+parser.y: warning: 3 shift/reduce conflicts [-Wconflicts-sr]
+parser.y: warning: 4 reduce/reduce conflicts [-Wconflicts-rr]
 parser.y: warning: shift/reduce conflict on token OPBR [-Wcounterexamples]
 time limit exceeded: 6.000000
   First example: COMPONENT_NAME • OPBR listterms CLBR DOT $end
@@ -11,7 +11,7 @@ time limit exceeded: 6.000000
               ↳ 3: intergral_expr                                       DOT
                    ↳ 4: expr
                         ↳ 6: component
-                             ↳ 16: COMPONENT_NAME • OPBR listterms CLBR
+                             ↳ 14: COMPONENT_NAME • OPBR listterms CLBR
   Second example: COMPONENT_NAME • OPBR list_components CLBR DOT $end
   Reduce derivation
     $accept
@@ -20,8 +20,8 @@ time limit exceeded: 6.000000
               ↳ 3: intergral_expr                                                             DOT
                    ↳ 5: intergral_expr                   expr
                         ↳ 4: expr                        ↳ 6: component
-                             ↳ 6: component                   ↳ 17: OPBR list_components CLBR
-                                  ↳ 15: COMPONENT_NAME •
+                             ↳ 6: component                   ↳ 15: OPBR list_components CLBR
+                                  ↳ 13: COMPONENT_NAME •
 parser.y: warning: shift/reduce conflict on token OPBR [-Wcounterexamples]
 time limit exceeded: 6.000000
   First example: component COLON MINUS COMPONENT_NAME • OPBR listterms CLBR expr DOT $end
@@ -32,8 +32,8 @@ time limit exceeded: 6.000000
               ↳ 3: intergral_expr                                                                       DOT
                    ↳ 5: expr                                                                       expr
                         ↳ 7: component COLON MINUS list_components
-                                                   ↳ 9: component
-                                                        ↳ 16: COMPONENT_NAME • OPBR listterms CLBR
+                                                   ↳ 8: component
+                                                        ↳ 14: COMPONENT_NAME • OPBR listterms CLBR
   Second example: component COLON MINUS COMPONENT_NAME • OPBR list_components CLBR DOT $end
   Reduce derivation
     $accept
@@ -42,9 +42,9 @@ time limit exceeded: 6.000000
               ↳ 3: intergral_expr                                                                                        DOT
                    ↳ 5: intergral_expr                                              expr
                         ↳ 4: expr                                                   ↳ 6: component
-                             ↳ 7: component COLON MINUS list_components                  ↳ 17: OPBR list_components CLBR
-                                                        ↳ 9: component
-                                                             ↳ 15: COMPONENT_NAME •
+                             ↳ 7: component COLON MINUS list_components                  ↳ 15: OPBR list_components CLBR
+                                                        ↳ 8: component
+                                                             ↳ 13: COMPONENT_NAME •
 parser.y: warning: shift/reduce conflict on token OPBR [-Wcounterexamples]
 time limit exceeded: 6.000000
   First example: component COLON MINUS COMPONENT_NAME • OPBR listterms CLBR OPERATOR OPBR subterm CLBR expr DOT $end
@@ -55,10 +55,10 @@ time limit exceeded: 6.000000
               ↳ 3: intergral_expr                                                                                                               DOT
                    ↳ 5: expr                                                                                                               expr
                         ↳ 7: component COLON MINUS list_components
-                                                   ↳ 12: subterm
-                                                         ↳ 19: term                                             OPERATOR OPBR subterm CLBR
+                                                   ↳ 10: subterm
+                                                         ↳ 16: term                                             OPERATOR OPBR subterm CLBR
                                                                ↳ 33: bracket_term
-                                                                     ↳ 35: COMPONENT_NAME • OPBR listterms CLBR
+                                                                     ↳ 34: COMPONENT_NAME • OPBR listterms CLBR
   Second example: component COLON MINUS COMPONENT_NAME • OPBR list_components CLBR DOT $end
   Reduce derivation
     $accept
@@ -67,9 +67,9 @@ time limit exceeded: 6.000000
               ↳ 3: intergral_expr                                                                                        DOT
                    ↳ 5: intergral_expr                                              expr
                         ↳ 4: expr                                                   ↳ 6: component
-                             ↳ 7: component COLON MINUS list_components                  ↳ 17: OPBR list_components CLBR
-                                                        ↳ 9: component
-                                                             ↳ 15: COMPONENT_NAME •
+                             ↳ 7: component COLON MINUS list_components                  ↳ 15: OPBR list_components CLBR
+                                                        ↳ 8: component
+                                                             ↳ 13: COMPONENT_NAME •
 parser.y: warning: reduce/reduce conflict on tokens CLBR, COMMA [-Wcounterexamples]
   First example: OPBR COMPONENT_NAME • CLBR DOT $end
   First reduce derivation
@@ -79,23 +79,26 @@ parser.y: warning: reduce/reduce conflict on tokens CLBR, COMMA [-Wcounterexampl
               ↳ 3: intergral_expr                                        DOT
                    ↳ 4: expr
                         ↳ 6: component
-                             ↳ 17: OPBR list_components             CLBR
-                                        ↳ 9: component
-                                             ↳ 15: COMPONENT_NAME •
-  Second example: OPBR OPBR COMPONENT_NAME • CLBR OPERATOR OPBR subterm CLBR CLBR DOT $end
-  Second reduce derivation
-    $accept
-    ↳ 0: program                                                                                                                     $end
-         ↳ 2: base_block
-              ↳ 3: intergral_expr                                                                                                DOT
-                   ↳ 4: expr
-                        ↳ 6: component
-                             ↳ 17: OPBR list_components                                                                     CLBR
-                                        ↳ 12: subterm
-                                              ↳ 19: term                                         OPERATOR OPBR subterm CLBR
-                                                    ↳ 34: OPBR listterms                    CLBR
-                                                               ↳ 24: term
-                                                                     ↳ 31: COMPONENT_NAME •
+                             ↳ 15: OPBR list_components             CLBR
+                                        ↳ 8: component
+                                             ↳ 13: COMPONENT_NAME •
+  Second example: OPBR OPBR OPBR COMPONENT_NAME • CLBR COLON MINUS listterms CLBR OPERATOR OPBR subterm CLBR CLBR DOT $end
+  Second reduce derivation              
+    $accept                             
+    ↳ 0: program                                                                                                                                                                       $end
+         ↳ 2: base_block                
+              ↳ 3: intergral_expr                                                                                                                                                  DOT
+                   ↳ 4: expr            
+                        ↳ 6: component  
+                             ↳ 15: OPBR list_components                                                                                                                       CLBR
+                                        ↳ 10: subterm
+                                              ↳ 16: term                                                                                           OPERATOR OPBR subterm CLBR
+                                                    ↳ 33: bracket_term
+                                                          ↳ 36: OPBR listterms                                          COLON MINUS listterms CLBR
+                                                                     ↳ 24: etc_br
+                                                                           ↳ 27: OPBR listterms                    CLBR
+                                                                                      ↳ 21: term
+                                                                                            ↳ 31: COMPONENT_NAME •
 parser.y: warning: shift/reduce conflict on token OPBR [-Wcounterexamples]
 time limit exceeded: 6.000000
   First example: component COLON MINUS term OPERATOR COMPONENT_NAME • OPBR listterms CLBR expr DOT $end
@@ -107,9 +110,9 @@ time limit exceeded: 6.000000
                    ↳ 5: intergral_expr                                                                                       expr
                         ↳ 4: expr
                              ↳ 7: component COLON MINUS subterm
-                                                        ↳ 20: term OPERATOR term
+                                                        ↳ 17: term OPERATOR term
                                                                             ↳ 33: bracket_term
-                                                                                  ↳ 35: COMPONENT_NAME • OPBR listterms CLBR
+                                                                                  ↳ 34: COMPONENT_NAME • OPBR listterms CLBR
   Second example: component COLON MINUS term OPERATOR COMPONENT_NAME • OPBR list_components CLBR DOT $end
   Reduce derivation
     $accept
@@ -118,46 +121,10 @@ time limit exceeded: 6.000000
               ↳ 3: intergral_expr                                                                                                             DOT
                    ↳ 5: intergral_expr                                                                   expr
                         ↳ 4: expr                                                                        ↳ 6: component
-                             ↳ 7: component COLON MINUS list_components                                       ↳ 17: OPBR list_components CLBR
-                                                        ↳ 12: subterm
-                                                              ↳ 20: term OPERATOR term
+                             ↳ 7: component COLON MINUS list_components                                       ↳ 15: OPBR list_components CLBR
+                                                        ↳ 10: subterm
+                                                              ↳ 17: term OPERATOR term
                                                                                   ↳ 31: COMPONENT_NAME •
-parser.y: warning: shift/reduce conflict on token CLBR [-Wcounterexamples]
-  Example: OPBR subterm • CLBR
-  Shift derivation
-    list_components
-    ↳ 12: subterm
-          ↳ 18: OPBR subterm • CLBR
-  Reduce derivation
-    list_components
-    ↳ 9: component
-         ↳ 17: OPBR list_components CLBR
-                    ↳ 12: subterm •
-parser.y: warning: reduce/reduce conflict on tokens COMPONENT_NAME, DOT, OPBR, CLBR, COMMA, CUT [-Wcounterexamples]
-  Example: list_components COMMA component •
-  First reduce derivation
-    list_components
-    ↳ 10: list_components COMMA component •
-  Second reduce derivation
-    list_components
-    ↳ 11: list_components COMMA component •
-parser.y: warning: reduce/reduce conflict on tokens COMPONENT_NAME, DOT, OPBR, CUT [-Wcounterexamples]
-  Example: component COLON MINUS list_components •
-  First reduce derivation
-    expr
-    ↳ 7: component COLON MINUS list_components •
-  Second reduce derivation
-    expr
-    ↳ 8: component COLON MINUS list_components •
-parser.y: warning: reduce/reduce conflict on tokens SQCLBR, VERTICAL_PIPE, CLBR, COMMA, COLON [-Wcounterexamples]
-  Example: OPBR listterms CLBR •
-  First reduce derivation
-    listterms
-    ↳ 27: OPBR listterms CLBR •
-  Second reduce derivation
-    listterms
-    ↳ 24: term
-          ↳ 34: OPBR listterms CLBR •
 parser.y: warning: reduce/reduce conflict on tokens CLBR, COMMA [-Wcounterexamples]
   First example: OPBR COMPONENT_NAME OPBR listterms CLBR • CLBR DOT $end
   First reduce derivation
@@ -167,28 +134,25 @@ parser.y: warning: reduce/reduce conflict on tokens CLBR, COMMA [-Wcounterexampl
               ↳ 3: intergral_expr                                                            DOT
                    ↳ 4: expr
                         ↳ 6: component
-                             ↳ 17: OPBR list_components                                 CLBR
-                                        ↳ 9: component
-                                             ↳ 16: COMPONENT_NAME OPBR listterms CLBR •
-  Second example: OPBR OPBR COMPONENT_NAME OPBR listterms CLBR • CLBR OPERATOR OPBR subterm CLBR CLBR DOT $end
+                             ↳ 15: OPBR list_components                                 CLBR
+                                        ↳ 8: component
+                                             ↳ 14: COMPONENT_NAME OPBR listterms CLBR •
+  Second example: OPBR OPBR OPBR COMPONENT_NAME OPBR listterms CLBR • CLBR COLON MINUS listterms CLBR OPERATOR OPBR subterm CLBR CLBR DOT $end
   Second reduce derivation
     $accept
-    ↳ 0: program                                                                                                                                               $end
+    ↳ 0: program                                                                                                                                                                                                 $end
          ↳ 2: base_block
-              ↳ 3: intergral_expr                                                                                                                          DOT
+              ↳ 3: intergral_expr                                                                                                                                                                            DOT
                    ↳ 4: expr
                         ↳ 6: component
-                             ↳ 17: OPBR list_components                                                                                               CLBR
-                                        ↳ 12: subterm
-                                              ↳ 19: term                                                                   OPERATOR OPBR subterm CLBR
-                                                    ↳ 34: OPBR listterms                                              CLBR
-                                                               ↳ 24: term
-                                                                     ↳ 33: bracket_term
-                                                                           ↳ 35: COMPONENT_NAME OPBR listterms CLBR •
-parser.y:84.5-87.5: warning: rule useless in parser due to conflicts [-Wother]
-   84 |     component COLON MINUS list_components
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-parser.y:139.5-142.5: warning: rule useless in parser due to conflicts [-Wother]
-  139 |     list_components   COMMA   component
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                             ↳ 15: OPBR list_components                                                                                                                                                 CLBR
+                                        ↳ 10: subterm
+                                              ↳ 16: term                                                                                                                     OPERATOR OPBR subterm CLBR
+                                                    ↳ 33: bracket_term
+                                                          ↳ 36: OPBR listterms                                                                    COLON MINUS listterms CLBR
+                                                                     ↳ 24: etc_br
+                                                                           ↳ 27: OPBR listterms                                              CLBR
+                                                                                      ↳ 21: term
+                                                                                            ↳ 33: bracket_term
+                                                                                                  ↳ 34: COMPONENT_NAME OPBR listterms CLBR •
 user@DESKTOP-D7MVOD0:/mnt/c/testprog/compilers/curswork$

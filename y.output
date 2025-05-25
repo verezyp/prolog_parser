@@ -1,0 +1,1009 @@
+Rules useless in parser due to conflicts
+
+    8 expr: component COLON MINUS list_components
+
+   11 list_components: list_components COMMA component
+
+
+State 1 conflicts: 1 shift/reduce
+State 11 conflicts: 1 shift/reduce, 2 reduce/reduce
+State 27 conflicts: 1 shift/reduce
+State 53 conflicts: 6 reduce/reduce
+State 59 conflicts: 4 reduce/reduce
+State 61 conflicts: 5 reduce/reduce
+State 64 conflicts: 2 reduce/reduce
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: program base_block
+    2        | base_block
+
+    3 base_block: intergral_expr DOT
+
+    4 intergral_expr: expr
+    5               | intergral_expr expr
+
+    6 expr: component
+    7     | component COLON MINUS list_components
+    8     | component COLON MINUS list_components
+
+    9 list_components: component
+   10                | list_components COMMA component
+   11                | list_components COMMA component
+   12                | subterm
+   13                | list_components COMMA subterm
+
+   14 component: CUT
+   15          | COMPONENT_NAME
+   16          | COMPONENT_NAME OPBR listterms CLBR
+   17          | OPBR list_components CLBR
+
+   18 subterm: term OPERATOR OPBR subterm CLBR
+   19        | term OPERATOR term
+   20        | subterm OPERATOR term
+   21        | subterm MINUS term
+
+   22 listterms: ε
+   23          | term
+   24          | listterms COMMA term
+   25          | listterms VERTICAL_PIPE term
+   26          | OPBR listterms CLBR
+
+   27 term: MINUS term
+   28     | STRING
+   29     | NUMBER
+   30     | COMPONENT_NAME
+   31     | VAR_NAME
+   32     | bracket_term
+   33     | OPBR listterms CLBR
+
+   34 bracket_term: COMPONENT_NAME OPBR listterms CLBR
+   35             | SQOPBR listterms SQCLBR
+   36             | OPBR listterms COLON MINUS listterms CLBR
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    NUMBER (258) 29
+    COMPONENT_NAME (259) 15 16 30 34
+    VAR_NAME (260) 31
+    SQOPBR (261) 35
+    SQCLBR (262) 35
+    VERTICAL_PIPE (263) 25
+    OPERATOR (264) 18 19 20
+    DOT (265) 3
+    OPBR (266) 16 17 18 26 33 34 36
+    CLBR (267) 16 17 18 26 33 34 36
+    COMMA (268) 10 11 13 24
+    COLON (269) 7 8 36
+    MINUS (270) 7 8 21 27 36
+    STRING (271) 28
+    CUT (272) 14
+
+
+Nonterminals, with rules where they appear
+
+    $accept (18)
+        on left: 0
+    program (19)
+        on left: 1 2
+        on right: 0 1
+    base_block (20)
+        on left: 3
+        on right: 1 2
+    intergral_expr (21)
+        on left: 4 5
+        on right: 3 5
+    expr (22)
+        on left: 6 7 8
+        on right: 4 5
+    list_components (23)
+        on left: 9 10 11 12 13
+        on right: 7 8 10 11 13 17
+    component (24)
+        on left: 14 15 16 17
+        on right: 6 7 8 9 10 11
+    subterm (25)
+        on left: 18 19 20 21
+        on right: 12 13 18 20 21
+    listterms (26)
+        on left: 22 23 24 25 26
+        on right: 16 24 25 26 33 34 35 36
+    term (27)
+        on left: 27 28 29 30 31 32 33
+        on right: 18 19 20 21 23 24 25 27
+    bracket_term (28)
+        on left: 34 35 36
+        on right: 32
+
+
+State 0
+
+    0 $accept: • program $end
+
+    COMPONENT_NAME  shift, and go to state 1
+    OPBR            shift, and go to state 2
+    CUT             shift, and go to state 3
+
+    program         go to state 4
+    base_block      go to state 5
+    intergral_expr  go to state 6
+    expr            go to state 7
+    component       go to state 8
+
+
+State 1
+
+   15 component: COMPONENT_NAME •
+   16          | COMPONENT_NAME • OPBR listterms CLBR
+
+    OPBR  shift, and go to state 9
+
+    OPBR      [reduce using rule 15 (component)]
+    $default  reduce using rule 15 (component)
+
+
+State 2
+
+   17 component: OPBR • list_components CLBR
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 11
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 14
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+    CUT             shift, and go to state 3
+
+    list_components  go to state 17
+    component        go to state 18
+    subterm          go to state 19
+    term             go to state 20
+    bracket_term     go to state 21
+
+
+State 3
+
+   14 component: CUT •
+
+    $default  reduce using rule 14 (component)
+
+
+State 4
+
+    0 $accept: program • $end
+    1 program: program • base_block
+
+    $end            shift, and go to state 22
+    COMPONENT_NAME  shift, and go to state 1
+    OPBR            shift, and go to state 2
+    CUT             shift, and go to state 3
+
+    base_block      go to state 23
+    intergral_expr  go to state 6
+    expr            go to state 7
+    component       go to state 8
+
+
+State 5
+
+    2 program: base_block •
+
+    $default  reduce using rule 2 (program)
+
+
+State 6
+
+    3 base_block: intergral_expr • DOT
+    5 intergral_expr: intergral_expr • expr
+
+    COMPONENT_NAME  shift, and go to state 1
+    DOT             shift, and go to state 24
+    OPBR            shift, and go to state 2
+    CUT             shift, and go to state 3
+
+    expr       go to state 25
+    component  go to state 8
+
+
+State 7
+
+    4 intergral_expr: expr •
+
+    $default  reduce using rule 4 (intergral_expr)
+
+
+State 8
+
+    6 expr: component •
+    7     | component • COLON MINUS list_components
+    8     | component • COLON MINUS list_components
+
+    COLON  shift, and go to state 26
+
+    $default  reduce using rule 6 (expr)
+
+
+State 9
+
+   16 component: COMPONENT_NAME OPBR • listterms CLBR
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 27
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 28
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+
+    $default  reduce using rule 22 (listterms)
+
+    listterms     go to state 29
+    term          go to state 30
+    bracket_term  go to state 21
+
+
+State 10
+
+   29 term: NUMBER •
+
+    $default  reduce using rule 29 (term)
+
+
+State 11
+
+   15 component: COMPONENT_NAME •
+   16          | COMPONENT_NAME • OPBR listterms CLBR
+   30 term: COMPONENT_NAME •
+   34 bracket_term: COMPONENT_NAME • OPBR listterms CLBR
+
+    OPBR  shift, and go to state 31
+
+    VERTICAL_PIPE  reduce using rule 30 (term)
+    OPERATOR       reduce using rule 30 (term)
+    OPBR           [reduce using rule 15 (component)]
+    CLBR           reduce using rule 15 (component)
+    CLBR           [reduce using rule 30 (term)]
+    COMMA          reduce using rule 15 (component)
+    COMMA          [reduce using rule 30 (term)]
+    COLON          reduce using rule 30 (term)
+    $default       reduce using rule 15 (component)
+
+
+State 12
+
+   31 term: VAR_NAME •
+
+    $default  reduce using rule 31 (term)
+
+
+State 13
+
+   35 bracket_term: SQOPBR • listterms SQCLBR
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 27
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 28
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+
+    $default  reduce using rule 22 (listterms)
+
+    listterms     go to state 32
+    term          go to state 30
+    bracket_term  go to state 21
+
+
+State 14
+
+   17 component: OPBR • list_components CLBR
+   33 term: OPBR • listterms CLBR
+   36 bracket_term: OPBR • listterms COLON MINUS listterms CLBR
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 11
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 33
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+    CUT             shift, and go to state 3
+
+    $default  reduce using rule 22 (listterms)
+
+    list_components  go to state 17
+    component        go to state 18
+    subterm          go to state 19
+    listterms        go to state 34
+    term             go to state 35
+    bracket_term     go to state 21
+
+
+State 15
+
+   27 term: MINUS • term
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 27
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 36
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+
+    term          go to state 37
+    bracket_term  go to state 21
+
+
+State 16
+
+   28 term: STRING •
+
+    $default  reduce using rule 28 (term)
+
+
+State 17
+
+   10 list_components: list_components • COMMA component
+   11                | list_components • COMMA component
+   13                | list_components • COMMA subterm
+   17 component: OPBR list_components • CLBR
+
+    CLBR   shift, and go to state 38
+    COMMA  shift, and go to state 39
+
+
+State 18
+
+    9 list_components: component •
+
+    $default  reduce using rule 9 (list_components)
+
+
+State 19
+
+   12 list_components: subterm •
+   20 subterm: subterm • OPERATOR term
+   21        | subterm • MINUS term
+
+    OPERATOR  shift, and go to state 40
+    MINUS     shift, and go to state 41
+
+    $default  reduce using rule 12 (list_components)
+
+
+State 20
+
+   18 subterm: term • OPERATOR OPBR subterm CLBR
+   19        | term • OPERATOR term
+
+    OPERATOR  shift, and go to state 42
+
+
+State 21
+
+   32 term: bracket_term •
+
+    $default  reduce using rule 32 (term)
+
+
+State 22
+
+    0 $accept: program $end •
+
+    $default  accept
+
+
+State 23
+
+    1 program: program base_block •
+
+    $default  reduce using rule 1 (program)
+
+
+State 24
+
+    3 base_block: intergral_expr DOT •
+
+    $default  reduce using rule 3 (base_block)
+
+
+State 25
+
+    5 intergral_expr: intergral_expr expr •
+
+    $default  reduce using rule 5 (intergral_expr)
+
+
+State 26
+
+    7 expr: component COLON • MINUS list_components
+    8     | component COLON • MINUS list_components
+
+    MINUS  shift, and go to state 43
+
+
+State 27
+
+   30 term: COMPONENT_NAME •
+   34 bracket_term: COMPONENT_NAME • OPBR listterms CLBR
+
+    OPBR  shift, and go to state 44
+
+    OPBR      [reduce using rule 30 (term)]
+    $default  reduce using rule 30 (term)
+
+
+State 28
+
+   26 listterms: OPBR • listterms CLBR
+   33 term: OPBR • listterms CLBR
+   36 bracket_term: OPBR • listterms COLON MINUS listterms CLBR
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 27
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 28
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+
+    $default  reduce using rule 22 (listterms)
+
+    listterms     go to state 45
+    term          go to state 30
+    bracket_term  go to state 21
+
+
+State 29
+
+   16 component: COMPONENT_NAME OPBR listterms • CLBR
+   24 listterms: listterms • COMMA term
+   25          | listterms • VERTICAL_PIPE term
+
+    VERTICAL_PIPE  shift, and go to state 46
+    CLBR           shift, and go to state 47
+    COMMA          shift, and go to state 48
+
+
+State 30
+
+   23 listterms: term •
+
+    $default  reduce using rule 23 (listterms)
+
+
+State 31
+
+   16 component: COMPONENT_NAME OPBR • listterms CLBR
+   34 bracket_term: COMPONENT_NAME OPBR • listterms CLBR
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 27
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 28
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+
+    $default  reduce using rule 22 (listterms)
+
+    listterms     go to state 49
+    term          go to state 30
+    bracket_term  go to state 21
+
+
+State 32
+
+   24 listterms: listterms • COMMA term
+   25          | listterms • VERTICAL_PIPE term
+   35 bracket_term: SQOPBR listterms • SQCLBR
+
+    SQCLBR         shift, and go to state 50
+    VERTICAL_PIPE  shift, and go to state 46
+    COMMA          shift, and go to state 48
+
+
+State 33
+
+   17 component: OPBR • list_components CLBR
+   26 listterms: OPBR • listterms CLBR
+   33 term: OPBR • listterms CLBR
+   36 bracket_term: OPBR • listterms COLON MINUS listterms CLBR
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 11
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 33
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+    CUT             shift, and go to state 3
+
+    $default  reduce using rule 22 (listterms)
+
+    list_components  go to state 17
+    component        go to state 18
+    subterm          go to state 19
+    listterms        go to state 45
+    term             go to state 35
+    bracket_term     go to state 21
+
+
+State 34
+
+   24 listterms: listterms • COMMA term
+   25          | listterms • VERTICAL_PIPE term
+   33 term: OPBR listterms • CLBR
+   36 bracket_term: OPBR listterms • COLON MINUS listterms CLBR
+
+    VERTICAL_PIPE  shift, and go to state 46
+    CLBR           shift, and go to state 51
+    COMMA          shift, and go to state 48
+    COLON          shift, and go to state 52
+
+
+State 35
+
+   18 subterm: term • OPERATOR OPBR subterm CLBR
+   19        | term • OPERATOR term
+   23 listterms: term •
+
+    OPERATOR  shift, and go to state 42
+
+    $default  reduce using rule 23 (listterms)
+
+
+State 36
+
+   33 term: OPBR • listterms CLBR
+   36 bracket_term: OPBR • listterms COLON MINUS listterms CLBR
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 27
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 28
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+
+    $default  reduce using rule 22 (listterms)
+
+    listterms     go to state 34
+    term          go to state 30
+    bracket_term  go to state 21
+
+
+State 37
+
+   27 term: MINUS term •
+
+    $default  reduce using rule 27 (term)
+
+
+State 38
+
+   17 component: OPBR list_components CLBR •
+
+    $default  reduce using rule 17 (component)
+
+
+State 39
+
+   10 list_components: list_components COMMA • component
+   11                | list_components COMMA • component
+   13                | list_components COMMA • subterm
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 11
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 14
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+    CUT             shift, and go to state 3
+
+    component     go to state 53
+    subterm       go to state 54
+    term          go to state 20
+    bracket_term  go to state 21
+
+
+State 40
+
+   20 subterm: subterm OPERATOR • term
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 27
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 36
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+
+    term          go to state 55
+    bracket_term  go to state 21
+
+
+State 41
+
+   21 subterm: subterm MINUS • term
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 27
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 36
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+
+    term          go to state 56
+    bracket_term  go to state 21
+
+
+State 42
+
+   18 subterm: term OPERATOR • OPBR subterm CLBR
+   19        | term OPERATOR • term
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 27
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 57
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+
+    term          go to state 58
+    bracket_term  go to state 21
+
+
+State 43
+
+    7 expr: component COLON MINUS • list_components
+    8     | component COLON MINUS • list_components
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 11
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 14
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+    CUT             shift, and go to state 3
+
+    list_components  go to state 59
+    component        go to state 18
+    subterm          go to state 19
+    term             go to state 20
+    bracket_term     go to state 21
+
+
+State 44
+
+   34 bracket_term: COMPONENT_NAME OPBR • listterms CLBR
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 27
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 28
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+
+    $default  reduce using rule 22 (listterms)
+
+    listterms     go to state 60
+    term          go to state 30
+    bracket_term  go to state 21
+
+
+State 45
+
+   24 listterms: listterms • COMMA term
+   25          | listterms • VERTICAL_PIPE term
+   26          | OPBR listterms • CLBR
+   33 term: OPBR listterms • CLBR
+   36 bracket_term: OPBR listterms • COLON MINUS listterms CLBR
+
+    VERTICAL_PIPE  shift, and go to state 46
+    CLBR           shift, and go to state 61
+    COMMA          shift, and go to state 48
+    COLON          shift, and go to state 52
+
+
+State 46
+
+   25 listterms: listterms VERTICAL_PIPE • term
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 27
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 36
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+
+    term          go to state 62
+    bracket_term  go to state 21
+
+
+State 47
+
+   16 component: COMPONENT_NAME OPBR listterms CLBR •
+
+    $default  reduce using rule 16 (component)
+
+
+State 48
+
+   24 listterms: listterms COMMA • term
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 27
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 36
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+
+    term          go to state 63
+    bracket_term  go to state 21
+
+
+State 49
+
+   16 component: COMPONENT_NAME OPBR listterms • CLBR
+   24 listterms: listterms • COMMA term
+   25          | listterms • VERTICAL_PIPE term
+   34 bracket_term: COMPONENT_NAME OPBR listterms • CLBR
+
+    VERTICAL_PIPE  shift, and go to state 46
+    CLBR           shift, and go to state 64
+    COMMA          shift, and go to state 48
+
+
+State 50
+
+   35 bracket_term: SQOPBR listterms SQCLBR •
+
+    $default  reduce using rule 35 (bracket_term)
+
+
+State 51
+
+   33 term: OPBR listterms CLBR •
+
+    $default  reduce using rule 33 (term)
+
+
+State 52
+
+   36 bracket_term: OPBR listterms COLON • MINUS listterms CLBR
+
+    MINUS  shift, and go to state 65
+
+
+State 53
+
+   10 list_components: list_components COMMA component •
+   11                | list_components COMMA component •
+
+    COMPONENT_NAME  reduce using rule 10 (list_components)
+    COMPONENT_NAME  [reduce using rule 11 (list_components)]
+    DOT             reduce using rule 10 (list_components)
+    DOT             [reduce using rule 11 (list_components)]
+    OPBR            reduce using rule 10 (list_components)
+    OPBR            [reduce using rule 11 (list_components)]
+    CLBR            reduce using rule 10 (list_components)
+    CLBR            [reduce using rule 11 (list_components)]
+    COMMA           reduce using rule 10 (list_components)
+    COMMA           [reduce using rule 11 (list_components)]
+    CUT             reduce using rule 10 (list_components)
+    CUT             [reduce using rule 11 (list_components)]
+    $default        reduce using rule 10 (list_components)
+
+
+State 54
+
+   13 list_components: list_components COMMA subterm •
+   20 subterm: subterm • OPERATOR term
+   21        | subterm • MINUS term
+
+    OPERATOR  shift, and go to state 40
+    MINUS     shift, and go to state 41
+
+    $default  reduce using rule 13 (list_components)
+
+
+State 55
+
+   20 subterm: subterm OPERATOR term •
+
+    $default  reduce using rule 20 (subterm)
+
+
+State 56
+
+   21 subterm: subterm MINUS term •
+
+    $default  reduce using rule 21 (subterm)
+
+
+State 57
+
+   18 subterm: term OPERATOR OPBR • subterm CLBR
+   33 term: OPBR • listterms CLBR
+   36 bracket_term: OPBR • listterms COLON MINUS listterms CLBR
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 27
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 28
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+
+    $default  reduce using rule 22 (listterms)
+
+    subterm       go to state 66
+    listterms     go to state 34
+    term          go to state 35
+    bracket_term  go to state 21
+
+
+State 58
+
+   19 subterm: term OPERATOR term •
+
+    $default  reduce using rule 19 (subterm)
+
+
+State 59
+
+    7 expr: component COLON MINUS list_components •
+    8     | component COLON MINUS list_components •
+   10 list_components: list_components • COMMA component
+   11                | list_components • COMMA component
+   13                | list_components • COMMA subterm
+
+    COMMA  shift, and go to state 39
+
+    COMPONENT_NAME  reduce using rule 7 (expr)
+    COMPONENT_NAME  [reduce using rule 8 (expr)]
+    DOT             reduce using rule 7 (expr)
+    DOT             [reduce using rule 8 (expr)]
+    OPBR            reduce using rule 7 (expr)
+    OPBR            [reduce using rule 8 (expr)]
+    CUT             reduce using rule 7 (expr)
+    CUT             [reduce using rule 8 (expr)]
+    $default        reduce using rule 7 (expr)
+
+
+State 60
+
+   24 listterms: listterms • COMMA term
+   25          | listterms • VERTICAL_PIPE term
+   34 bracket_term: COMPONENT_NAME OPBR listterms • CLBR
+
+    VERTICAL_PIPE  shift, and go to state 46
+    CLBR           shift, and go to state 67
+    COMMA          shift, and go to state 48
+
+
+State 61
+
+   26 listterms: OPBR listterms CLBR •
+   33 term: OPBR listterms CLBR •
+
+    SQCLBR         reduce using rule 26 (listterms)
+    SQCLBR         [reduce using rule 33 (term)]
+    VERTICAL_PIPE  reduce using rule 26 (listterms)
+    VERTICAL_PIPE  [reduce using rule 33 (term)]
+    OPERATOR       reduce using rule 33 (term)
+    CLBR           reduce using rule 26 (listterms)
+    CLBR           [reduce using rule 33 (term)]
+    COMMA          reduce using rule 26 (listterms)
+    COMMA          [reduce using rule 33 (term)]
+    COLON          reduce using rule 26 (listterms)
+    COLON          [reduce using rule 33 (term)]
+    $default       reduce using rule 26 (listterms)
+
+
+State 62
+
+   25 listterms: listterms VERTICAL_PIPE term •
+
+    $default  reduce using rule 25 (listterms)
+
+
+State 63
+
+   24 listterms: listterms COMMA term •
+
+    $default  reduce using rule 24 (listterms)
+
+
+State 64
+
+   16 component: COMPONENT_NAME OPBR listterms CLBR •
+   34 bracket_term: COMPONENT_NAME OPBR listterms CLBR •
+
+    VERTICAL_PIPE  reduce using rule 34 (bracket_term)
+    OPERATOR       reduce using rule 34 (bracket_term)
+    CLBR           reduce using rule 16 (component)
+    CLBR           [reduce using rule 34 (bracket_term)]
+    COMMA          reduce using rule 16 (component)
+    COMMA          [reduce using rule 34 (bracket_term)]
+    COLON          reduce using rule 34 (bracket_term)
+    $default       reduce using rule 16 (component)
+
+
+State 65
+
+   36 bracket_term: OPBR listterms COLON MINUS • listterms CLBR
+
+    NUMBER          shift, and go to state 10
+    COMPONENT_NAME  shift, and go to state 27
+    VAR_NAME        shift, and go to state 12
+    SQOPBR          shift, and go to state 13
+    OPBR            shift, and go to state 28
+    MINUS           shift, and go to state 15
+    STRING          shift, and go to state 16
+
+    $default  reduce using rule 22 (listterms)
+
+    listterms     go to state 68
+    term          go to state 30
+    bracket_term  go to state 21
+
+
+State 66
+
+   18 subterm: term OPERATOR OPBR subterm • CLBR
+   20        | subterm • OPERATOR term
+   21        | subterm • MINUS term
+
+    OPERATOR  shift, and go to state 40
+    CLBR      shift, and go to state 69
+    MINUS     shift, and go to state 41
+
+
+State 67
+
+   34 bracket_term: COMPONENT_NAME OPBR listterms CLBR •
+
+    $default  reduce using rule 34 (bracket_term)
+
+
+State 68
+
+   24 listterms: listterms • COMMA term
+   25          | listterms • VERTICAL_PIPE term
+   36 bracket_term: OPBR listterms COLON MINUS listterms • CLBR
+
+    VERTICAL_PIPE  shift, and go to state 46
+    CLBR           shift, and go to state 70
+    COMMA          shift, and go to state 48
+
+
+State 69
+
+   18 subterm: term OPERATOR OPBR subterm CLBR •
+
+    $default  reduce using rule 18 (subterm)
+
+
+State 70
+
+   36 bracket_term: OPBR listterms COLON MINUS listterms CLBR •
+
+    $default  reduce using rule 36 (bracket_term)

@@ -5,7 +5,7 @@ all:
 
 warn:
 	flex lexer.l
-	yacc -d parser.y 
+	yacc -d parser.y 	
 	gcc -w lex.yy.c y.tab.c -o prolog_parser 
 
 

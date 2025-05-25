@@ -328,7 +328,8 @@ indent(I) :-
 % Prints all options for user responses
 print_instructions :-
 	nl, 
-        write('Hello.  Please answer my questions with one of the following:'), nl,
+        write('Hello.  Please answer my questions with \
+		one of the following:'), nl,
 	write('    "y.", which means "yes" (confidence value 100).'), nl,
 	write('    "n.", which means "no"  (confidence value -100).'), nl, 
 	write('    A number followed by a period.  The number, which should be'), nl,
